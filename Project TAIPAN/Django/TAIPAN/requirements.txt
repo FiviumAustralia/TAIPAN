@@ -1,0 +1,3 @@
+-e git://github.com/django/django.git@58da81a5a372a69f0bac801c412b57f3cce5f188#egg=Django
+django-reversion==2.0.9
+pytz==2017.2

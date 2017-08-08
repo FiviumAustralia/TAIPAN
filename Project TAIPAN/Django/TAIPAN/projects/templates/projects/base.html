@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}TAIPAN{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'projects/css/style.css' %}">
+    <script src="{% static 'projects/javascript/manage.js' %}"></script>
+</head>
+<body>
+    <nav id="sidebar-left" class="sidebar top bar-block animate-left" style="display:none;">
+        <a href="javascript:void(0)" onclick="close_sidebar()" class="bar-item button left">☰</a>
+    </nav>
+    <div id="top-bar" class="top">
+        <div class="button left" onclick="open_sidebar()" style="position:fixed!important;z-index:2;color:white;">☰</div>
+        <h1 class="center inner top title">TAIPAN</h1>
+        <h3 class="center inner subtitle">Testing Analysis Integration Panacea</h3>
+        <div id="link-bar" class="bar bottom inner">
+            <ul id="links">
+                <li>
+                    <a href="{% url 'projects:index' %}" class="bar-item button">Projects</a>
+                </li>
+                <li>
+                    <a href="{% url 'reporting:index' %}" class="bar-item button">Reporting</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="main" id="frame">
+        <div class="breadcrumbs">
+            <ul>
+            {% block crumbs %}{% endblock %}
+            </ul>
+            <hr class="fade"/>
+        </div>
+        <div id="main-content">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    <div id="bottom-bar" class="bottom bar">
+        <ul style="height:inherit;">
+            <li class="bar-item right">Copyright © 2017 Fivium Health, Australia</li>
+        </ul>
+    </div>
+</body>
+</html>

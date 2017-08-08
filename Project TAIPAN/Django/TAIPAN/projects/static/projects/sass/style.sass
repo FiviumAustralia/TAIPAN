@@ -1,0 +1,389 @@
+@import reset
+
+// Page Styling */
+
+$color-primary-0: #F0A959	// Main primary color */
+$color-primary-1: #FFEDD8
+$color-primary-2: #FFCC94
+$color-primary-3: #DC8320
+$color-primary-4: #A05704
+
+$color-secondary-0: #3C7C97	// Main secondary color */
+$color-secondary-1: #C4DCE6
+$color-secondary-2: #70A4BB
+$color-secondary-3: #19688A
+$color-secondary-4: #074965
+
+$shade-0: #FEFEFE
+$shade-1: #D8D8D8
+$shade-2: #BEBEBE
+$shade-3: #727272
+$shade-4: #232323
+$shade-5: #000
+
+// Button Styling */
+
+$btn-0-shadow: #9acc85
+$btn-0-from: #74ad5a
+$btn-0-to: #68a54b
+$btn-0-font-color: white
+$btn-0-border: #3b6e22
+
+$btn-1-shadow: white
+$btn-1-from: #ededed
+$btn-1-to: #dfdfdf
+$btn-1-font-color: #444
+$btn-1-border: #9a9a9a
+
+$btn-2-shadow: #D7A5A0
+$btn-2-from: #DC6D63
+$btn-2-to: #C4483D
+$btn-2-font-color: white
+$btn-2-border: #B81506
+
+// Fonts */
+
+$font-godlike: 72px
+$font-gigantic: 48px
+$font-huge: 36px
+$font-large: 32px
+$font-medium: 24px
+$font-small: 16px
+$font-tiny: 12px
+
+$default-font: "Trebuchet MS", sans-serif
+
+$top-margin: 128px
+$bottom-margin: 32px
+$main-height: calc(100% - 160px)
+$sidebar-width: 240px
+
+html
+  height: 100%
+  font-family: $default-font
+
+body
+  background-color: $shade-3
+  margin: 0
+  padding: 0
+  height: 100%
+  width: 100%
+  position: absolute
+
+h1
+  font-size: $font-huge
+  padding: 16px 0
+
+h2
+  font-size: $font-large
+  padding: 12px 0
+
+h3
+  font-size: $font-medium
+  padding: 8px 0
+
+#top-bar
+  background-color: $shade-4
+  height: $top-margin
+
+#page_title
+  text-align: center
+
+#link-bar
+  background-color: $color-secondary-0
+  position: absolute
+
+#links
+  margin: 0 $sidebar-width - 4px
+
+.breadcrumbs
+  font-size: $font-small
+  color: $shade-3
+  a
+    color: $shade-2
+
+#bottom-bar
+  color: $shade-0
+  background-color: $shade-4
+  height: $bottom-margin
+
+.crumb
+  display: inline
+
+.top, .bottom
+  position: fixed
+  width: 100%
+  z-index: 1
+
+.top
+  top: 0
+
+.bottom
+  bottom: 0
+
+.animate-left
+  position: relative
+  animation: animateleft 0.2s
+  @keyframes animateleft
+    from
+      left: -300px
+      opacity: 0.5
+    to
+      left: 0
+      opacity: 1
+
+.animate-right
+  position: relative
+  animation: animateright 0.2s
+  @keyframes animateright
+    from
+      right: -300px
+      opacity: 0.5
+    to
+      right: 0
+      opacity: 1
+
+.btn, .button
+  border: none
+  display: inline-block
+  outline: 0
+  padding: 8px 16px
+  vertical-align: middle
+  overflow: hidden
+  text-decoration: none
+  color: inherit
+  background-color: inherit
+  text-align: center
+  cursor: pointer
+  white-space: nowrap
+
+.bar
+  width: 100%
+  overflow: hidden
+
+.center .bar
+  display: inline-block
+  width: auto
+
+.bar .bar-item
+  padding: 8px 16px
+  height: 100%
+  float: left
+  width: auto
+  border: none
+  outline: none
+  vertical-align: middle
+
+.bar .button
+  white-space: normal
+
+.bar-block .bar-item
+  width: 100%
+  display: block
+  padding: 8px 16px
+  box-sizing: border-box
+  text-align: left
+  border: none
+  outline: none
+  white-space: normal
+  float: none
+
+.bar-block.center .bar-item
+  text-align: center
+
+.block
+  display: block
+  width: 100%
+
+.inner
+  position: relative
+
+.sidebar
+  height: 100%
+  width: $sidebar-width
+  background-color: $color-primary-0
+  position: fixed!important
+  z-index: 2
+  overflow: auto
+
+.left-align
+  text-align: left!important
+
+.right-align
+  text-align: right!important
+
+.justify
+  text-align: justify!important
+
+.center
+  text-align: center!important
+
+.huge
+  font-size: $font-huge
+
+.large
+  font-size: $font-large
+
+.medium
+  font-size: $font-medium
+
+.small
+  font-size: $font-small
+
+.tiny
+  font-size: $font-tiny
+
+.left
+  float: left!important
+
+.right
+  float: right!important
+
+.title
+  color: $shade-0
+  padding: 16px 0 0 0
+
+.subtitle
+  color: $shade-1
+  padding: 0 0 16px 0
+
+.pad-8
+  padding: 8px 0
+
+.pad-16
+  padding: 16px 0
+
+.pad-24
+  padding: 24px 0
+
+.pad-32
+  padding: 32px 0
+
+.mar-8
+  margin: 8px 0
+
+.mar-16
+  margin: 16px 0
+
+.mar-24
+  margin: 24px 0
+
+.mar-32
+  margin: 32px 0
+
+.main
+  margin: $top-margin $sidebar-width 0 $sidebar-width
+  padding: 12px
+  min-height: $main-height
+  background-color: $shade-0
+
+#link-bar .button
+  margin: 0 4px
+  font-size: $font-medium
+  background-color: $color-secondary-2
+  &:hover
+    background-color: $color-secondary-1!important
+
+.sidebar .button
+  &:hover
+    color: $shade-4!important
+    background-color: $color-primary-2!important
+
+.main-form input
+  width: 100%
+  height: $font-medium + 4px
+  font-size: $font-medium
+  margin: 8px 0
+
+.main-form label
+  font-size: $font-small
+
+hr.fade
+  border: 0
+  border-top: 1px solid $shade-4
+
+table.list
+  display: table
+  width: 100%
+
+td, th
+  padding: 16px 8px
+
+table.list th
+  font-weight: bold
+
+table.zebra tr
+  &:nth-child(even)
+    background-color: $shade-1
+
+button
+  display: inline-block
+  font-size: $font-small
+  padding: 4px 12px
+  text-decoration: none
+
+button.primary-button
+  -moz-box-shadow: inset 0px 1px 0px 0px $btn-0-shadow
+  -webkit-box-shadow: inset 0px 1px 0px 0px $btn-0-shadow
+  box-shadow: inset 0px 1px 0px 0px $btn-0-shadow
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, $btn-0-from), color-stop(1, $btn-0-to))
+  background: -moz-linear-gradient(top, $btn-0-from 5%, $btn-0-to 100%)
+  background: -webkit-linear-gradient(top, $btn-0-from 5%, $btn-0-to 100%)
+  background: -o-linear-gradient(top, $btn-0-from 5%, $btn-0-to 100%)
+  background: -ms-linear-gradient(top, $btn-0-from 5%, $btn-0-to 100%)
+  background: linear-gradient(to bottom, $btn-0-from 5%, $btn-0-to 100%)
+  background-color: $btn-0-from
+  border: 1px solid $btn-0-border
+  color: $btn-0-font-color
+  &:hover
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, $btn-0-to), color-stop(1, $btn-0-from))
+    background: -moz-linear-gradient(top, $btn-0-to 5%, $btn-0-from 100%)
+    background: -webkit-linear-gradient(top, $btn-0-to 5%, $btn-0-from 100%)
+    background: -o-linear-gradient(top, $btn-0-to 5%, $btn-0-from 100%)
+    background: -ms-linear-gradient(top, $btn-0-to 5%, $btn-0-from 100%)
+    background: linear-gradient(to bottom, $btn-0-to 5%, $btn-0-from 100%)
+    background-color: $btn-0-to
+
+button.secondary-button
+  -moz-box-shadow: inset 0px 1px 0px 0px $btn-1-shadow
+  -webkit-box-shadow: inset 0px 1px 0px 0px $btn-1-shadow
+  box-shadow: inset 0px 1px 0px 0px $btn-1-shadow
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, $btn-1-from), color-stop(1, $btn-1-to))
+  background: -moz-linear-gradient(top, $btn-1-from 5%, $btn-1-to 100%)
+  background: -webkit-linear-gradient(top, $btn-1-from 5%, $btn-1-to 100%)
+  background: -o-linear-gradient(top, $btn-1-from 5%, $btn-1-to 100%)
+  background: -ms-linear-gradient(top, $btn-1-from 5%, $btn-1-to 100%)
+  background: linear-gradient(to bottom, $btn-1-from 5%, $btn-1-to 100%)
+  background-color: $btn-1-from
+  border: 1px solid $btn-1-border
+  color: $btn-1-font-color
+  &:hover
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, $btn-1-to), color-stop(1, $btn-1-from))
+    background: -moz-linear-gradient(top, $btn-1-to 5%, $btn-1-from 100%)
+    background: -webkit-linear-gradient(top, $btn-1-to 5%, $btn-1-from 100%)
+    background: -o-linear-gradient(top, $btn-1-to 5%, $btn-1-from 100%)
+    background: -ms-linear-gradient(top, $btn-1-to 5%, $btn-1-from 100%)
+    background: linear-gradient(to bottom, $btn-1-to 5%, $btn-1-from 100%)
+    background-color: $btn-1-to
+    
+button.danger-button
+  -moz-box-shadow: inset 0px 1px 0px 0px $btn-2-shadow
+  -webkit-box-shadow: inset 0px 1px 0px 0px $btn-2-shadow
+  box-shadow: inset 0px 1px 0px 0px $btn-2-shadow
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, $btn-2-from), color-stop(1, $btn-2-to))
+  background: -moz-linear-gradient(top, $btn-2-from 5%, $btn-2-to 100%)
+  background: -webkit-linear-gradient(top, $btn-2-from 5%, $btn-2-to 100%)
+  background: -o-linear-gradient(top, $btn-2-from 5%, $btn-2-to 100%)
+  background: -ms-linear-gradient(top, $btn-2-from 5%, $btn-2-to 100%)
+  background: linear-gradient(to bottom, $btn-2-from 5%, $btn-2-to 100%)
+  background-color: $btn-2-from
+  border: 1px solid $btn-2-border
+  color: $btn-2-font-color
+  &:hover
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, $btn-2-to), color-stop(1, $btn-2-from))
+    background: -moz-linear-gradient(top, $btn-2-to 5%, $btn-2-from 100%)
+    background: -webkit-linear-gradient(top, $btn-2-to 5%, $btn-2-from 100%)
+    background: -o-linear-gradient(top, $btn-2-to 5%, $btn-2-from 100%)
+    background: -ms-linear-gradient(top, $btn-2-to 5%, $btn-2-from 100%)
+    background: linear-gradient(to bottom, $btn-2-to 5%, $btn-2-from 100%)
+    background-color: $btn-2-to

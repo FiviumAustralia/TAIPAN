@@ -1,0 +1,24 @@
+$color-primary-0: #D7CEC7
+$color-primary-1: #928072
+$color-primary-2: #B3A59B
+$color-primary-3: #FFFAF7
+$color-primary-4: #FFFEFE
+
+$color-secondary-1-0: #76323F
+$color-secondary-1-1: #410813
+$color-secondary-1-2: #601C29
+$color-secondary-1-3: #98505E
+$color-secondary-1-4: #BC7A87
+
+$color-secondary-2-0: #C09F80
+$color-secondary-2-1: #7F5935
+$color-secondary-2-2: #A17C59
+$color-secondary-2-3: #E5CBB3
+$color-secondary-2-4: #FFF1E3
+
+$shade-0: #030303
+$shade-1: #181818
+$shade-2: #565656
+$shade-3: #878787
+$shade-4: #B7B7B7
+$shade-5: #E5E5E5

@@ -1,0 +1,40 @@
+{% extends "../base.html" %}
+{% load projects_extras %}
+{% block title %}TAIPAN | Bundle - {{ bd.name }}{% endblock %}
+{% block crumbs %}
+{% with pd=project|get_current %}
+    <li class="crumb">> <a href="{% url 'projects:index' %}">Projects</a></li>
+    <li class="crumb">> <a href="{% url 'projects:project_detail' pd.project.id %}">{{ pd.name }}</a></li>
+    <li class="crumb">> {{ bd.name }}</li>
+{% endwith %}
+{% endblock %}
+{% block content %}
+    <h1>{{ bd.name }}</h1>
+    <h2>Builds</h2>
+    {% with bd.bundle|get_builds as builds %}
+    {% if builds|length > 0 %}
+    <table class="list zebra">
+        <tr>
+            <th></th>
+            <th class="left-align">Description</th>
+            <th class="right-align">Actions</th>
+        </tr>
+        {% for bid in builds %}
+        <tr>
+            <td class="left-align">{{ bid.name }}</td>
+            <td class="left-align">{{ bid.description }}</td>
+            <td class="right-align">
+                <ul>
+                    <li><a href="{% url 'projects:build_detail' bd.project.id bd.bundle.id bid.build.id %}">View</a></li>
+                    <li><a href="{% url 'projects:edit_build' bd.project.id bd.bundle.id bid.build.id %}">Edit</a></li>
+                </ul>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p>There are currently no builds for this project. Click the button below to add one</p>
+    {% endif %}
+    {% endwith %}
+    <a href="{% url 'projects:new_build' bd.project.id bd.bundle.id %}" class="right pad-8">+ Create Build</a>
+{% endblock %}
