@@ -1,0 +1,35 @@
+{% extends "../base.html" %}
+{% load projects_extras %}
+{% block title %}TAIPAN | Projects - {{ pd.name }}{% endblock %}
+{% block content %}
+    <h1>Details for Project {{ pd.name }}</h1>
+    <div class="card">
+        <h2>Bundles</h2>
+        {% with bundles=pd|get_bundles %}
+        {% if bundles|length > 0 %}
+        <table class="list zebra">
+            <tr>
+                <th></th>
+                <th class="left-align">Description</th>
+                <th class="right-align">Actions</th>
+            </tr>
+            {% for bd in bundles %}
+            <tr>
+                <td class="left-align">{{ bd.name }}</td>
+                <td class="left-align">{{ bd.description }}</td>
+                <td class="right-align">
+                    <ul>
+                        <li><a href="{% url 'projects:bundle_detail' bd.id %}">View</a></li>
+                        <li><a href="{% url 'projects:edit_bundle' bd.id %}">Edit</a></li>
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>There are currently no bundles for this project. Click the button below to add one</p>
+        {% endif %}
+        {% endwith %}
+        <a href="{% url 'projects:new_bundle' pd.id %}" class="right-align">+ Create Bundle</a>
+    </div>
+{% endblock %}

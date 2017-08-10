@@ -1,0 +1,71 @@
+{% extends "../base.html" %}
+{% load projects_extras %}
+{% block title %}TAIPAN | Bundle - {{ bd.name }}{% endblock %}
+{% block content %}
+    <h1>{{ bd.name }}</h1>
+    <div class="card">
+        {% with suite=bd|get_suite %}
+        <table class="list zebra">
+            <tr>
+                <th class="left-align">Test Suite</th>
+                <th class="left-align">Description</th>
+                <th class="right-align">Actions</th>
+            </tr>
+            <tr>
+                <td class="left-align">{{ suite.name }}</td>
+                <td class="left-align">{{ suite.description }}</td>
+                <td class="right-align">
+                    <ul>
+                        <li><a href="{% url 'projects:suite_detail' suite.id %}">View</a></li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="card">
+        <h2>Builds</h2>
+        {% with builds=bd|get_builds %}
+        {% if builds|length > 0 %}
+        <table class="list zebra">
+            <tr>
+                <th></th>
+                <th class="left-align">Status</th>
+                <th class="left-align">Description</th>
+                <th class="right-align">Actions</th>
+            </tr>
+            {% for bid in builds %}
+            <tr>
+                <td class="left-align">{{ bid.name }}</td>
+                <td class="left-align">
+                    {% with status=bid|check_failure %}
+                    {% if status == 'FAILED' %}
+                    <p class="red bold">{{ status }}</p>
+                    {% elif status == 'PASSED' %}
+                    <p class="green bold">{{ status }}</p>
+                    {% else %}
+                    <p class="amber bold">{{ status }}</p>
+                    {% endif %}
+                    {% endwith %}
+                </td>
+                <td class="left-align">{{ bid.description }}</td>
+                <td class="right-align">
+                    <ul>
+                        <li><a href="{% url 'projects:build_detail' bid.id %}">View</a></li>
+                        <li><a href="{% url 'projects:edit_build' bid.id %}">Edit</a></li>
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>There are currently no builds for this project. Click the button below to add one</p>
+        {% endif %}
+        {% if suite|get_tests|length == 0 %}
+        <p>You must add at least one test inside the suite before a build can be added</p>
+        {% else %}
+        <a href="{% url 'projects:new_build' bd.id %}" class="right-align">+ Create Build</a>
+        {% endif %}
+        {% endwith %}
+        {% endwith %}
+    </div>
+{% endblock %}

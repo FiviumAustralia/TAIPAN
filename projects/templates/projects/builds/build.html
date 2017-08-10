@@ -1,0 +1,42 @@
+{% extends "../base.html" %}
+{% load projects_extras %}
+{% block title %}TAIPAN | Build - {{ bid.name }}{% endblock %}
+{% block content %}
+    <h1>{{ bid.name }}</h1>
+    <div class="card">
+        <h2>Tests</h2>
+        {% with tests=bid|get_build_tests %}
+        {% if tests|length > 0 %}
+        <table class="list zebra">
+            <tr>
+                <th></th>
+                <th class="left-align">Description</th>
+                <th class="left-align">Result</th>
+                <th class="right-align">Actions</th>
+            </tr>
+            {% for btd in tests %}
+            <tr>
+                <td class="left-align">{{ btd.name }}</td>
+                <td class="left-align">{{ btd.description }}</td>
+                <td class="left-align">
+                    {% if btd.result == 'FAILED' %}
+                    <p class="red bold">{{ btd.result }}</p>
+                    {% elif btd.result == 'PASSED' %}
+                    <p class="green bold">{{ btd.result }}</p>
+                    {% else %}
+                    <p class="amber bold">AWAITING RESULT</p>
+                    {% endif %}
+                </td>
+                <td class="right-align">
+                    <ul>
+                        <li><a href="{% url 'projects:build_test_detail' btd.id %}">View</a></li>
+                        <li><a href="{% url 'projects:edit_build_test' btd.id %}">Edit</a></li>
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        {% endwith %}
+    </div>
+{% endblock %}

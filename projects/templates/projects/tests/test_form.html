@@ -1,0 +1,9 @@
+{% extends "../base.html" %}
+{% load projects_extras %}
+{% block title %}TAIPAN | Test Edit{% endblock %}
+{% block content %}
+    {% if form.instance.id %}
+    <h1>Edit Test</h1>
+    {% endif %}
+    {% include 'projects/form-template.html' %}
+{% endblock %}

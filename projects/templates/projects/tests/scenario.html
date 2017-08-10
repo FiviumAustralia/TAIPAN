@@ -1,0 +1,8 @@
+{% extends "../base.html" %}
+{% load projects_extras %}
+{% block title %}TAIPAN | Test - {{ tsd.name }}{% endblock %}
+{% block content %}
+    <h1>{{ tsd.name }}</h1>
+    <h2>Expected</h2>
+    <p>{{ tsd.expected }}</p>
+{% endblock %}

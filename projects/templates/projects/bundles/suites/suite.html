@@ -1,0 +1,37 @@
+{% extends "../../base.html" %}
+{% load projects_extras %}
+{% block title %}TAIPAN | Suite - {{ sd.name }}{% endblock %}
+{% block content %}
+    <h1>{{ sd.name }}</h1>
+    <div class="card">
+        <h2>Test Scenarios</h2>
+        {% with tests=sd|get_tests %}
+        {% if tests|length > 0 %}
+        <table class="list zebra">
+            <tr>
+                <th></th>
+                <th class="left-align">Description</th>
+                <th class="left-align">Required?</th>
+                <th class="right-align">Actions</th>
+            </tr>
+            {% for td in tests %}
+            <tr>
+                <td class="left-align">{{ td.name }}</td>
+                <td class="left-align">{{ td.description }}</td>
+                <td class="left-align">{{ td.requisite }}</td>
+                <td class="right-align">
+                    <ul>
+                        <li><a href="{% url 'projects:test_detail' td.id %}">View</a></li>
+                        <li><a href="{% url 'projects:edit_test' td.id %}">Edit</a></li>
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+            <p>There are currently no tests for this suite. Click the button below to add one</p>
+        {% endif %}
+        <a href="{% url 'projects:new_test' sd.id %}" class="right-align">+ Create Test Scenario</a>
+        {% endwith %}
+    </div>
+{% endblock %}

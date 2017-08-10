@@ -1,0 +1,12 @@
+{% extends "../../base.html" %}
+{% load projects_extras %}
+{% block title %}TAIPAN | Test - {{ btd.name }}{% endblock %}
+{% block content %}
+    <h1>{{ btd.name }}</h1>
+    <h2>Expected</h2>
+    <p>{{ btd.test.expected }}</p>
+    <h2>Actual</h2>
+    <p>{{ btd.actual }}</p>
+    <h2>Result</h2>
+    <p>{{ btd.result }}</p>
+{% endblock %}

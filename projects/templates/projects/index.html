@@ -1,0 +1,29 @@
+{% extends "./base.html" %}
+{% block title %}TAIPAN | Projects{% endblock %}
+{% block crumbs %}
+    <li class="crumb">> Projects</li>
+{% endblock %}
+{% block content %}
+    <h1>Projects</h1>
+    {% if projects|length > 0 %}
+    {% for pd in projects %}
+    <div class="card">
+        <div class="row">
+            <div class="col-md-8">
+                <h2>{{ pd.name }}</h2>
+                <p class="left-align">{{ pd.description }}</p>
+            </div>
+            <div class="col-md-4 pad-24 right-align">
+                <ul class="block">
+                    <li><a href="{% url 'projects:project_detail' pd.id %}">View</a></li>
+                    <li><a href="{% url 'projects:edit_project' pd.id %}">Edit</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+        <p>There are currently no projects. Click the button below to add one</p>
+    {% endif %}
+    <a href="{% url 'projects:new_project' %}" class="right-align">+ Create Project</a>
+{% endblock %}
