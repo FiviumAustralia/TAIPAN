@@ -1,279 +1,11 @@
-@import reset
-
-// Page Styling */
-
-$color-primary-0: #F0A959	// Main primary color */
-$color-primary-1: #FFEDD8
-$color-primary-2: #FFCC94
-$color-primary-3: #DC8320
-$color-primary-4: #A05704
-
-$color-secondary-0: #3C7C97	// Main secondary color */
-$color-secondary-1: #C4DCE6
-$color-secondary-2: #70A4BB
-$color-secondary-3: #19688A
-$color-secondary-4: #074965
-
-$shade-0: #FEFEFE
-$shade-1: #D8D8D8
-$shade-2: #BEBEBE
-$shade-3: #727272
-$shade-4: #232323
-$shade-5: #000
-
-// Button Styling */
-
-$btn-0-shadow: #9acc85
-$btn-0-from: #74ad5a
-$btn-0-to: #68a54b
-$btn-0-font-color: white
-$btn-0-border: #3b6e22
-
-$btn-1-shadow: white
-$btn-1-from: #ededed
-$btn-1-to: #dfdfdf
-$btn-1-font-color: #444
-$btn-1-border: #9a9a9a
-
-$btn-2-shadow: #D7A5A0
-$btn-2-from: #DC6D63
-$btn-2-to: #C4483D
-$btn-2-font-color: white
-$btn-2-border: #B81506
-
-// Fonts */
-
-$font-godlike: 72px
-$font-gigantic: 48px
-$font-huge: 36px
-$font-large: 32px
-$font-medium: 24px
-$font-small: 16px
-$font-tiny: 12px
-
-$top-margin: 128px
-$bottom-margin: 32px
-$main-height: calc(100% - 160px)
-$sidebar-width: 12.5%
-
-html
-  height: 100%
-  font-family: 'Trebuchet MS', sans-serif
+@import ../../../../static/sass/reset
+@import ../../../../static/sass/global
 
 body
   background-color: $shade-0!important
 
-h1
-  font-size: $font-huge
-
-h2
-  font-size: $font-large
-
-h3
-  font-size: $font-medium
-
-#top-bar
-  background-color: $shade-4
-  height: $top-margin
-
-#page_title
-  text-align: center
-
-#link-bar
-  background-color: $color-secondary-0
-  position: absolute
-
 #links
   margin: 0 calc(#{$sidebar-width} + 4px)
-
-.breadcrumbs
-  font-size: $font-small
-  color: $shade-3
-  a
-    color: $shade-2
-
-#bottom-bar
-  color: $shade-0
-  background-color: $shade-4
-  height: $bottom-margin
-
-.crumb
-  display: inline
-
-.top, .bottom
-  position: fixed
-  width: 100%
-  z-index: 1
-
-.top
-  top: 0
-
-.bottom
-  bottom: 0
-
-.animate-left
-  position: relative
-  animation: animateleft 0.2s
-  @keyframes animateleft
-    from
-      left: -300px
-      opacity: 0.5
-    to
-      left: 0
-      opacity: 1
-
-.animate-right
-  position: relative
-  animation: animateright 0.2s
-  @keyframes animateright
-    from
-      right: -300px
-      opacity: 0.5
-    to
-      right: 0
-      opacity: 1
-
-.btn, .button
-  border: none
-  display: inline-block
-  outline: 0
-  padding: 8px 16px
-  vertical-align: middle
-  overflow: hidden
-  text-decoration: none
-  color: inherit
-  background-color: inherit
-  text-align: center
-  cursor: pointer
-  white-space: nowrap
-
-.bar
-  width: 100%
-  overflow: hidden
-
-.center .bar
-  display: inline-block
-  width: auto
-
-.bar .bar-item
-  padding: 8px 16px
-  height: 100%
-  float: left
-  width: auto
-  border: none
-  outline: none
-  vertical-align: middle
-
-.bar .button
-  white-space: normal
-
-.bar-block .bar-item
-  width: 100%
-  display: block
-  padding: 8px 16px
-  box-sizing: border-box
-  text-align: left
-  border: none
-  outline: none
-  white-space: normal
-  float: none
-
-.bar-block.center .bar-item
-  text-align: center
-
-.block
-  display: block
-  width: 100%
-
-.inner
-  position: relative
-
-.sidebar
-  height: 100%
-  width: $sidebar-width
-  background-color: $color-primary-0
-  position: fixed!important
-  z-index: 2
-  overflow: auto
-
-.amber
-  color: #DD8504
-
-.green
-  color: #20C204
-
-.red
-  color: #FF1C04
-
-.bold
-  font-weight: bold
-
-.left-align
-  text-align: left!important
-
-.right-align
-  text-align: right!important
-
-.justify
-  text-align: justify!important
-
-.center
-  text-align: center!important
-
-.huge
-  font-size: $font-huge
-
-.large
-  font-size: $font-large
-
-.medium
-  font-size: $font-medium
-
-.small
-  font-size: $font-small
-
-.tiny
-  font-size: $font-tiny
-
-.left
-  float: left!important
-
-.right
-  float: right!important
-
-.title
-  color: $shade-0
-  padding: 12px 0 0 0
-  font-size: $font-large
-  font-family: 'Sedgwick Ave', cursive
-
-.subtitle
-  color: $shade-1
-  font-size: $font-small
-
-.pad-8
-  padding: 8px 0
-
-.pad-16
-  padding: 16px 0
-
-.pad-24
-  padding: 24px 0
-
-.pad-32
-  padding: 32px 0
-
-.mar-8
-  margin: 8px 0
-
-.mar-16
-  margin: 16px 0
-
-.mar-24
-  margin: 24px 0
-
-.mar-32
-  margin: 32px 0
 
 .main
   margin: $top-margin $sidebar-width 0 $sidebar-width
@@ -281,26 +13,16 @@ h3
   min-height: $main-height!important
   background-color: $shade-0
 
-#link-bar .button
-  margin: 0 4px
-  font-size: $font-small
-  background-color: $color-secondary-2
-  &:hover
-    background-color: $color-secondary-1!important
-
-.sidebar .button
-  &:hover
-    color: $shade-4!important
-    background-color: $color-primary-2!important
-
-.main-form input
+.main-form div
   width: 100%
-  height: $font-medium + 4px
-  font-size: $font-medium
-  margin: 8px 0
+
+.main-form input[type="text"], textarea
+  width: 50%
 
 .main-form label
-  font-size: $font-small
+    font-size: $font-small
+    margin-bottom: 0
+    margin-top: 4px
 
 .light
   border: 0
@@ -311,91 +33,109 @@ table.list
   display: table
   width: 100%
   margin: 8px 0
-
-table.list th
-  font-weight: bold
+  & th
+    font-weight: bold
+    background-color: $color-secondary-1
+    padding: 2px
 
 table.list td, table.list th
   padding: 8px
+  word-wrap: break-word
+  overflow-wrap: break-word
+
+table.list td.multiline
+  white-space: pre-line
+
+.full
+  width: 100%
+  margin: 0
 
 table.zebra tr
   &:nth-child(even)
     background-color: $shade-1
 
-button
-  display: inline-block
-  font-size: $font-small
-  padding: 4px 12px
-  text-decoration: none
-
-button.primary-button
-  -moz-box-shadow: inset 0px 1px 0px 0px $btn-0-shadow
-  -webkit-box-shadow: inset 0px 1px 0px 0px $btn-0-shadow
-  box-shadow: inset 0px 1px 0px 0px $btn-0-shadow
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, $btn-0-from), color-stop(1, $btn-0-to))
-  background: -moz-linear-gradient(top, $btn-0-from 5%, $btn-0-to 100%)
-  background: -webkit-linear-gradient(top, $btn-0-from 5%, $btn-0-to 100%)
-  background: -o-linear-gradient(top, $btn-0-from 5%, $btn-0-to 100%)
-  background: -ms-linear-gradient(top, $btn-0-from 5%, $btn-0-to 100%)
-  background: linear-gradient(to bottom, $btn-0-from 5%, $btn-0-to 100%)
-  background-color: $btn-0-from
-  border: 1px solid $btn-0-border
-  color: $btn-0-font-color
-  &:hover
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, $btn-0-to), color-stop(1, $btn-0-from))
-    background: -moz-linear-gradient(top, $btn-0-to 5%, $btn-0-from 100%)
-    background: -webkit-linear-gradient(top, $btn-0-to 5%, $btn-0-from 100%)
-    background: -o-linear-gradient(top, $btn-0-to 5%, $btn-0-from 100%)
-    background: -ms-linear-gradient(top, $btn-0-to 5%, $btn-0-from 100%)
-    background: linear-gradient(to bottom, $btn-0-to 5%, $btn-0-from 100%)
-    background-color: $btn-0-to
-
-button.secondary-button
-  -moz-box-shadow: inset 0px 1px 0px 0px $btn-1-shadow
-  -webkit-box-shadow: inset 0px 1px 0px 0px $btn-1-shadow
-  box-shadow: inset 0px 1px 0px 0px $btn-1-shadow
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, $btn-1-from), color-stop(1, $btn-1-to))
-  background: -moz-linear-gradient(top, $btn-1-from 5%, $btn-1-to 100%)
-  background: -webkit-linear-gradient(top, $btn-1-from 5%, $btn-1-to 100%)
-  background: -o-linear-gradient(top, $btn-1-from 5%, $btn-1-to 100%)
-  background: -ms-linear-gradient(top, $btn-1-from 5%, $btn-1-to 100%)
-  background: linear-gradient(to bottom, $btn-1-from 5%, $btn-1-to 100%)
-  background-color: $btn-1-from
-  border: 1px solid $btn-1-border
-  color: $btn-1-font-color
-  &:hover
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, $btn-1-to), color-stop(1, $btn-1-from))
-    background: -moz-linear-gradient(top, $btn-1-to 5%, $btn-1-from 100%)
-    background: -webkit-linear-gradient(top, $btn-1-to 5%, $btn-1-from 100%)
-    background: -o-linear-gradient(top, $btn-1-to 5%, $btn-1-from 100%)
-    background: -ms-linear-gradient(top, $btn-1-to 5%, $btn-1-from 100%)
-    background: linear-gradient(to bottom, $btn-1-to 5%, $btn-1-from 100%)
-    background-color: $btn-1-to
-    
-button.danger-button
-  -moz-box-shadow: inset 0px 1px 0px 0px $btn-2-shadow
-  -webkit-box-shadow: inset 0px 1px 0px 0px $btn-2-shadow
-  box-shadow: inset 0px 1px 0px 0px $btn-2-shadow
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, $btn-2-from), color-stop(1, $btn-2-to))
-  background: -moz-linear-gradient(top, $btn-2-from 5%, $btn-2-to 100%)
-  background: -webkit-linear-gradient(top, $btn-2-from 5%, $btn-2-to 100%)
-  background: -o-linear-gradient(top, $btn-2-from 5%, $btn-2-to 100%)
-  background: -ms-linear-gradient(top, $btn-2-from 5%, $btn-2-to 100%)
-  background: linear-gradient(to bottom, $btn-2-from 5%, $btn-2-to 100%)
-  background-color: $btn-2-from
-  border: 1px solid $btn-2-border
-  color: $btn-2-font-color
-  &:hover
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, $btn-2-to), color-stop(1, $btn-2-from))
-    background: -moz-linear-gradient(top, $btn-2-to 5%, $btn-2-from 100%)
-    background: -webkit-linear-gradient(top, $btn-2-to 5%, $btn-2-from 100%)
-    background: -o-linear-gradient(top, $btn-2-to 5%, $btn-2-from 100%)
-    background: -ms-linear-gradient(top, $btn-2-to 5%, $btn-2-from 100%)
-    background: linear-gradient(to bottom, $btn-2-to 5%, $btn-2-from 100%)
-    background-color: $btn-2-to
-
 div.card
-  box-shadow: 2px 2px 2px 2px $shade-1
+  box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.3)
   border: 1px solid $shade-1
   padding: 16px
   margin: 8px 0
+  &.over
+    border: 2px dotted $color-secondary-0
+
+#main-content:last-child
+  margin-bottom: 64px !important
+
+tr.strike td.strikeable
+  color: $shade-3
+  text-decoration: line-through
+
+div.banner
+  width: 100%
+  padding: 8px
+  border-width: 3px
+  border-radius: 16px
+  border-style: solid
+
+div.danger
+  border-color: $red
+
+div.warning
+  border-color: $amber
+
+div.info
+  border-color: $color-secondary-1
+
+.large-field
+  height: 100px
+  font-size: $font-small
+  overflow-x: hidden
+  overflow-y: scroll
+  overflow-wrap: break-word
+  resize: vertical
+
+.small-field
+  height: $font-small + 8px
+  font-size: $font-small
+  overflow-wrap: normal
+
+.tiny-field
+  height: $font-small + 8px
+  width: 25%!important
+  font-size: $font-small
+  overflow-wrap: normal
+
+.selector
+  min-width: 100px
+  min-height: 30px
+
+.project-logo-main
+  position: relative
+  overflow: hidden
+  width: 100%
+  max-width: 200px
+  background-color: $shade-0
+  box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.3)
+  border: 1px solid $shade-1
+  &:before
+    content: ""
+    display: block
+    padding-top: 100%
+
+.project-logo-main img
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  padding: 10px
+  max-width: 100%
+  max-height: 100%
+  overflow: hidden
+
+[draggable]
+  -moz-user-select: none
+  -khtml-user-select: none
+  -webkit-user-select: none
+  user-select: none
+  -khtml-user-drag: element
+  -webkit-user-drag: element

@@ -1,28 +1,37 @@
-{% extends "../../base.html" %}
+{% extends "projects/content.html" %}
 {% load projects_extras %}
-{% block title %}TAIPAN | Suite - {{ sd.name }}{% endblock %}
+{% block title %}TAIPAN | {{ suite.name }}{% endblock %}
 {% block content %}
-    <h1>{{ sd.name }}</h1>
+    <h1>{{ suite.name }}</h1>
     <div class="card">
         <h2>Test Scenarios</h2>
-        {% with tests=sd|get_tests %}
+        {% with tests=suite|get_tests %}
         {% if tests|length > 0 %}
         <table class="list zebra">
-            <tr>
-                <th></th>
-                <th class="left-align">Description</th>
-                <th class="left-align">Required?</th>
-                <th class="right-align">Actions</th>
+            <tr class="row">
+                <th class="left-align col-md-1">Ref#</th>
+                <th class="left-align col-md-3">Test Overview</th>
+                <th class="left-align col-md-3">Steps Taken</th>
+                <th class="left-align col-md-3">Expected</th>
+                <th class="justify col-md-1">Required?</th>
+                <th class="right-align col-md-1">Actions</th>
             </tr>
-            {% for td in tests %}
-            <tr>
-                <td class="left-align">{{ td.name }}</td>
-                <td class="left-align">{{ td.description }}</td>
-                <td class="left-align">{{ td.requisite }}</td>
-                <td class="right-align">
+            {% for test in tests %}
+            {% if test.requisite == 'NO' %}
+            <tr class="strike row">
+            {% else %}
+            <tr class="row">
+            {% endif %}
+                <td class="left-align col-md-1">{{ test.reference_number }}</td>
+                <td class="left-align strikeable col-md-3">{{ test.overview }}</td>
+                <td class="left-align strikeable col-md-3">{{ test.steps }}</td>
+                <td class="left-align strikeable col-md-3">{{ test.expected }}</td>
+                <td class="justify col-md-1">{{ test.requisite }}</td>
+                <td class="right-align col-md-1">
                     <ul>
-                        <li><a href="{% url 'projects:test_detail' td.id %}">View</a></li>
-                        <li><a href="{% url 'projects:edit_test' td.id %}">Edit</a></li>
+                        <li><a href="{% url 'projects:edit_test' test.id %}" data-toggle="tooltip">
+                            <span class="glyphicon glyphicon-pencil"></span> Edit
+                        </a></li>
                     </ul>
                 </td>
             </tr>
@@ -31,7 +40,11 @@
         {% else %}
             <p>There are currently no tests for this suite. Click the button below to add one</p>
         {% endif %}
-        <a href="{% url 'projects:new_test' sd.id %}" class="right-align">+ Create Test Scenario</a>
+        <div class="right-align" style="width:100%;">
+            <a href="{% url 'projects:new_test' suite.id %}">
+                <span class="glyphicon glyphicon-plus"></span> Create Test Scenario
+            </a>
+        </div>
         {% endwith %}
     </div>
 {% endblock %}

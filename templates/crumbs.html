@@ -6,9 +6,9 @@
 {% for crumb in crumbs %}
 <li class="crumb">>
     {% if crumb.2 != True %}
-    <a href="{{ crumb.1 }}">{{ crumb.0.name }}</a>
+    <a href="{{ crumb.1 }}">{{ crumb.0.name }}{{ crumb.0.overview }}</a>
     {% else %}
-    {{ crumb.0.name }}
+    {{ crumb.0.name }}{{ crumb.0.overview }}
     {% endif %}
 </li>
 {% endfor %}
@@ -18,9 +18,9 @@
 {% for crumb in crumbs %}
 <li class="crumb">>
     {% if crumb.2 != True %}
-    <a href="{{ crumb.1 }}">{{ crumb.0.name }}</a>
+    <a href="{{ crumb.1 }}">{{ crumb.0.name }}{{ crumb.0.overview }}</a>
     {% else %}
-    {{ crumb.0.name }}
+    {{ crumb.0.name }}{{ crumb.0.overview }}
     {% endif %}
 </li>
 {% endfor %}

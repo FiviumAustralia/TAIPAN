@@ -1,7 +1,7 @@
-{% extends "../base.html" %}
+{% extends "projects/content.html" %}
 {% load projects_extras %}
-{% block title %}TAIPAN | Issue - {{ isd.name }}{% endblock %}
+{% block title %}TAIPAN | Issue {{ issue.name }}{% endblock %}
 {% block content %}
-    <h1>{{ isd.name }}</h1>
+    <h1>{{ issue.name }}</h1>
     <h2>Todo</h2>
 {% endblock %}

@@ -1,0 +1,15 @@
+{% extends "projects/content.html" %}
+{% load projects_extras %}
+{% block title %}TAIPAN | Test Edit{% endblock %}
+{% block content %}
+    {% if form.instance.id %}
+    <h1>Edit Scenario</h1>
+    {% else %}
+    <h1>Create Scenario</h1>
+    {% endif %}
+    <div class="warning banner card center">
+        <p>It is strongly recommended that if requirements have changed, a new test be created instead.</p>
+        <p>This page is for editorial changes only (spelling mistakes and incorrect information).</p>
+    </div>
+    {% include 'projects/form-template.html' %}
+{% endblock %}

@@ -1,6 +1,10 @@
 from django.db import models
 from django.urls import reverse
+from django.core.validators import RegexValidator
 from datetime import datetime
+
+alphanumeric_period = RegexValidator(r'^[0-9a-zA-Z\.]*$', 'Only alphanumeric and the period characters are allowed.')
+numeric_period_dash = RegexValidator(r'^[0-9_.-]+$', 'Only numeric, dashes and the period characters are allowed.')
 
 
 # Create your models here.
@@ -13,6 +17,11 @@ class Detail(models.Model):
     date_start = models.DateTimeField(default=datetime.now)
     date_modified = models.DateTimeField(default=datetime.now)
 
+    class Meta:
+        abstract = True
+
+
+class NamedDetail(Detail):
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=4000)
 
@@ -20,19 +29,21 @@ class Detail(models.Model):
         abstract = True
 
 
-class ProjectDetail(Detail):
+class ProjectDetail(NamedDetail):
+    project_logo = models.FileField(null=True, blank=True, default=None)
+
     def get_absolute_url(self):
         return reverse('projects:project_detail', kwargs={'pk': self.pk})
 
 
-class BundleDetail(Detail):
+class BundleDetail(NamedDetail):
     project = models.ForeignKey(ProjectDetail, on_delete=models.CASCADE)
 
     def get_absolute_url(self):
         return reverse('projects:bundle_detail', kwargs={'pk': self.pk})
 
 
-class RequirementDetail(Detail):
+class RequirementDetail(NamedDetail):
     bundle = models.ForeignKey(BundleDetail, on_delete=models.CASCADE)
     req_id = models.CharField(max_length=10)
 
@@ -41,13 +52,16 @@ class RequirementDetail(Detail):
 
 
 class BuildDetail(Detail):
+    name = models.CharField(max_length=50, validators=[numeric_period_dash])
+    description = models.CharField(max_length=4000)
     bundle = models.ForeignKey(BundleDetail, on_delete=models.CASCADE)
+    cascade_tests = models.BooleanField(default=False)
 
     def get_absolute_url(self):
         return reverse('projects:build_detail', kwargs={'pk': self.pk})
 
 
-class SuiteDetail(Detail):
+class SuiteDetail(NamedDetail):
     bundle = models.ForeignKey(BundleDetail, on_delete=models.CASCADE)
 
     def get_absolute_url(self):
@@ -57,19 +71,22 @@ class SuiteDetail(Detail):
 class TestScenarioDetail(Detail):
     suite = models.ForeignKey(SuiteDetail, on_delete=models.CASCADE)
     # requirement = models.ForeignKey(RequirementDetail, on_delete=models.SET_NULL, null=True, blank=True)
+    reference_number = models.CharField(max_length=16, blank=True, null=True, validators=[alphanumeric_period])
+    overview = models.CharField(max_length=200)
+    steps = models.CharField(max_length=4000)
 
     expected = models.CharField(max_length=4000, null=True, blank=True, default=None)
     REQUISITE_CHOICES = {
-        ('REMOVED', 'Removed'),
-        ('REQUIRED', 'Yes'),
+        ('NO', 'No'),
+        ('YES', 'Yes'),
     }
-    requisite = models.CharField(max_length=10, choices=REQUISITE_CHOICES, default='REQUIRED')
+    requisite = models.CharField(max_length=10, choices=REQUISITE_CHOICES, default='YES')
 
     def get_absolute_url(self):
         return reverse('projects:test_detail', kwargs={'pk': self.pk})
 
 
-class BuildTestDetail(Detail):
+class BuildTestDetail(NamedDetail):
     test = models.ForeignKey(TestScenarioDetail, on_delete=models.CASCADE)
     build = models.ForeignKey(BuildDetail, on_delete=models.CASCADE)
 
@@ -84,6 +101,7 @@ class BuildTestDetail(Detail):
         ('NONE', 'N/A'),
     )
     stage = models.CharField(max_length=10, choices=STAGE_CHOICES, default='AWAITING')
+    expected = models.CharField(max_length=4000, null=True, blank=True, default=None)
     actual = models.CharField(max_length=4000, null=True, blank=True, default=None)
     result = models.CharField(max_length=10, choices=RESULT_CHOICES, default='NONE')
 
@@ -91,7 +109,7 @@ class BuildTestDetail(Detail):
         return reverse('projects:build_test_detail', kwargs={'pk': self.pk})
 
 
-class IssueDetail(Detail):
+class IssueDetail(NamedDetail):
     build_test = models.ForeignKey(BuildTestDetail, on_delete=models.CASCADE)
 
     PRIORITY_CHOICES = (

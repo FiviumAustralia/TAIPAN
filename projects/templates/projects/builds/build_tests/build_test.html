@@ -1,12 +1,28 @@
-{% extends "../../base.html" %}
+{% extends "projects/content.html" %}
 {% load projects_extras %}
-{% block title %}TAIPAN | Test - {{ btd.name }}{% endblock %}
+{% block title %}TAIPAN | {{ build_test.name }}{% endblock %}
 {% block content %}
-    <h1>{{ btd.name }}</h1>
-    <h2>Expected</h2>
-    <p>{{ btd.test.expected }}</p>
-    <h2>Actual</h2>
-    <p>{{ btd.actual }}</p>
-    <h2>Result</h2>
-    <p>{{ btd.result }}</p>
+    <h1>{{ build_test.name }}</h1>
+    <div class="row">
+        <div class="col-md-5">
+            <p class="left-align">Expected</p>
+        </div>
+        <div class="col-md-5">
+            <p class="left-align">Actual</p>
+        </div>
+        <div class="col-md-2">
+            <p class="right-align">Result</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <p class="left-align">{{ build_test.expected }}</p>
+        </div>
+        <div class="col-md-5">
+            <p class="left-align">{{ build_test.actual }}</p>
+        </div>
+        <div class="col-md-2">
+            <p class="right-align">{{ build_test.result }}</p>
+        </div>
+    </div>
 {% endblock %}

@@ -2,6 +2,8 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from .models import *
 from django.http import HttpResponseRedirect
 from datetime import datetime
+from django.forms import TextInput, Textarea, Select, CheckboxInput
+from .forms import ModelFormWidgetMixin, BuildForm
 import reversion
 
 
@@ -17,50 +19,54 @@ class IndexView(ListView):
 # DETAILS
 class ProjectDetailView(DetailView):
     model = ProjectDetail
-    context_object_name = 'pd'
+    context_object_name = 'project'
     template_name = 'projects/project/project.html'
 
 
 class BundleDetailView(DetailView):
     model = BundleDetail
-    context_object_name = 'bd'
+    context_object_name = 'bundle'
     template_name = 'projects/bundles/bundle.html'
 
 
 class BuildDetailView(DetailView):
     model = BuildDetail
-    context_object_name = 'bid'
+    context_object_name = 'build'
     template_name = 'projects/builds/build.html'
 
 
 class SuiteDetailView(DetailView):
     model = SuiteDetail
-    context_object_name = 'sd'
+    context_object_name = 'suite'
     template_name = 'projects/bundles/suites/suite.html'
 
 
 class TestScenarioDetailView(DetailView):
     model = TestScenarioDetail
-    context_object_name = 'tsd'
-    template_name = 'projects/tests/scenario.html'
+    context_object_name = 'test_scenario'
+    template_name = 'projects/bundles/suites/tests/scenario.html'
 
 
 class BuildTestDetailView(DetailView):
     model = BuildTestDetail
-    context_object_name = 'btd'
+    context_object_name = 'build_test'
     template_name = 'projects/builds/build_tests/build_test.html'
 
 
 class IssueDetailView(DetailView):
     model = IssueDetail
-    context_object_name = 'isd'
+    context_object_name = 'issue'
     template_name = 'projects/bundles/builds/issues/issue.html'
 
 
 # CREATES
-class ProjectCreate(CreateView):
+class ProjectCreate(ModelFormWidgetMixin, CreateView):
     model = ProjectDetail
-    fields = ['name', 'description']
+    fields = ['name', 'description', 'project_logo']
+    widgets = {
+        'name': TextInput(attrs={'class': 'small-field'}),
+        'description': Textarea(attrs={'class': 'large-field'}),
+    }
     template_name = 'projects/project/project_form.html'
 
     def form_valid(self, form):
@@ -70,9 +76,13 @@ class ProjectCreate(CreateView):
         return HttpResponseRedirect(reverse('projects:index'))
 
 
-class BundleCreate(CreateView):
+class BundleCreate(ModelFormWidgetMixin, CreateView):
     model = BundleDetail
     fields = ['name', 'description']
+    widgets = {
+        'name': TextInput(attrs={'class': 'small-field'}),
+        'description': Textarea(attrs={'class': 'large-field'}),
+    }
     template_name = 'projects/bundles/bundle_form.html'
 
     def get_context_data(self, **kwargs):
@@ -88,14 +98,21 @@ class BundleCreate(CreateView):
             detail.save()
             # Create a test suite for the bundle
         with reversion.create_revision():
-            suite = SuiteDetail(bundle=detail, name=detail.name + ' Testing Suite', description='Test suite for ' + detail.name)
+            suite = SuiteDetail(bundle=detail, name='{} Testing Suite'.format(detail.name),
+                                description='Test suite for {}'.format(detail.name))
             suite.save()
         return HttpResponseRedirect(reverse('projects:project_detail', kwargs={'pk': self.kwargs['project_id']}))
 
 
-class BuildCreate(CreateView):
+class BuildCreate(ModelFormWidgetMixin, CreateView):
     model = BuildDetail
-    fields = ['name', 'description']
+    fields = ['name', 'description', 'cascade_tests']
+    widgets = {
+        'name': TextInput(attrs={'class': 'small-field'}),
+        'description': Textarea(attrs={'class': 'large-field'}),
+        'cascade_tests': CheckboxInput(attrs={'class': 'small-field'}),
+    }
+    # form_class = BuildForm()
     template_name = 'projects/builds/build_form.html'
 
     def get_context_data(self, **kwargs):
@@ -105,9 +122,19 @@ class BuildCreate(CreateView):
 
     def generate_tests(self, suite, build):
         for test in TestScenarioDetail.objects.filter(suite=suite):
-            if test.requisite == 'REQUIRED':
+            if test.requisite == 'YES':
                 with reversion.create_revision():
-                    build_test = BuildTestDetail(test=test, build=build, name=build.name + ': ' + test.name, description=test.description)
+                    build_test = BuildTestDetail(test=test,
+                                                 build=build,
+                                                 name='''{}\n{}'''.format(build.name, test.reference_number),
+                                                 description='''{}\n\n{}'''.format(test.overview, test.steps),
+                                                 expected=test.expected)
+                    if build.cascade_tests:
+                        if len(BuildTestDetail.objects.filter(test__id=build_test.test.id).exclude(status='ARCHIVED').order_by('-date_start')) > 0:
+                            last_test = BuildTestDetail.objects.filter(test__id=build_test.test.id).exclude(status='ARCHIVED').order_by('-date_start')[0]
+                            if last_test.result == 'PASSED':
+                                build_test.actual = last_test.actual
+                                build_test.result = last_test.result
                     build_test.save()
 
     def form_valid(self, form):
@@ -124,10 +151,16 @@ class BuildCreate(CreateView):
 # SuiteDetail does not require a create view since we're creating it above
 
 
-class TestScenarioCreate(CreateView):
+class TestScenarioCreate(ModelFormWidgetMixin, CreateView):
     model = TestScenarioDetail
-    fields = ['name', 'description', 'expected']
-    template_name = 'projects/tests/test_form.html'
+    fields = ['reference_number', 'overview', 'steps', 'expected']
+    widgets = {
+        'reference_number': TextInput(attrs={'class': 'tiny-field'}),
+        'overview': TextInput(attrs={'class': 'small-field'}),
+        'steps': Textarea(attrs={'class': 'large-field'}),
+        'expected': Textarea(attrs={'class': 'large-field'}),
+    }
+    template_name = 'projects/bundles/suites/tests/test_form.html'
 
     def get_context_data(self, **kwargs):
         context = super(TestScenarioCreate, self).get_context_data(**kwargs)
@@ -145,9 +178,15 @@ class TestScenarioCreate(CreateView):
 # BuildTestDetail does not require a create view since we're creating them all above
 
 
-class IssueCreate(CreateView):
+class IssueCreate(ModelFormWidgetMixin, CreateView):
     model = IssueDetail
     fields = ['name', 'description', 'priority', 'severity']
+    widgets = {
+        'name': TextInput(attrs={'class': 'small-field'}),
+        'description': Textarea(attrs={'class': 'large-field'}),
+        'priority': Select(attrs={'class': 'selector'}),
+        'severity': Select(attrs={'class': 'selector'}),
+    }
     template_name = 'projects/builds/issue_form.html'
 
     def get_context_data(self, **kwargs):
@@ -166,9 +205,13 @@ class IssueCreate(CreateView):
 
 
 # UPDATES
-class ProjectUpdate(UpdateView):
+class ProjectUpdate(ModelFormWidgetMixin, UpdateView):
     model = ProjectDetail
-    fields = ['name', 'description']
+    fields = ['name', 'description', 'project_logo']
+    widgets = {
+        'name': TextInput(attrs={'class': 'small-field'}),
+        'description': Textarea(attrs={'class': 'large-field'}),
+    }
     template_name = 'projects/project/project_form.html'
 
     def form_valid(self, form):
@@ -179,9 +222,13 @@ class ProjectUpdate(UpdateView):
         return HttpResponseRedirect(reverse('projects:index'))
 
 
-class BundleUpdate(UpdateView):
+class BundleUpdate(ModelFormWidgetMixin, UpdateView):
     model = BundleDetail
     fields = ['name', 'description']
+    widgets = {
+        'name': TextInput(attrs={'class': 'small-field'}),
+        'description': Textarea(attrs={'class': 'large-field'}),
+    }
     template_name = 'projects/bundles/bundle_form.html'
 
     def form_valid(self, form):
@@ -192,9 +239,13 @@ class BundleUpdate(UpdateView):
         return HttpResponseRedirect(reverse('projects:project_detail', kwargs={'pk': detail.project.id}))
 
 
-class BuildUpdate(UpdateView):
+class BuildUpdate(ModelFormWidgetMixin, UpdateView):
     model = BuildDetail
     fields = ['name', 'description']
+    widgets = {
+        'name': TextInput(attrs={'class': 'small-field'}),
+        'description': Textarea(attrs={'class': 'large-field'}),
+    }
     template_name = 'projects/builds/build_form.html'
 
     def form_valid(self, form):
@@ -207,10 +258,17 @@ class BuildUpdate(UpdateView):
 # SuiteDetail does not require an update view
 
 
-class TestScenarioUpdate(UpdateView):
+class TestScenarioUpdate(ModelFormWidgetMixin, UpdateView):
     model = TestScenarioDetail
-    fields = ['name', 'description', 'expected', 'requisite']
-    template_name = 'projects/tests/test_form.html'
+    fields = ['reference_number', 'overview', 'steps', 'expected', 'requisite']
+    widgets = {
+        'reference_number': TextInput(attrs={'class': 'tiny-field'}),
+        'overview': TextInput(attrs={'class': 'small-field'}),
+        'steps': Textarea(attrs={'class': 'large-field'}),
+        'expected': Textarea(attrs={'class': 'large-field'}),
+        'requisite': Select(attrs={'class': 'selector'})
+    }
+    template_name = 'projects/bundles/suites/tests/test_form.html'
 
     def form_valid(self, form):
         with reversion.create_revision():
@@ -220,9 +278,13 @@ class TestScenarioUpdate(UpdateView):
         return HttpResponseRedirect(reverse('projects:suite_detail', kwargs={'pk': detail.suite.id}))
 
 
-class BuildTestUpdate(UpdateView):
+class BuildTestUpdate(ModelFormWidgetMixin, UpdateView):
     model = BuildTestDetail
     fields = ['actual', 'result']
+    widgets = {
+        'actual': Textarea(attrs={'class': 'large-field'}),
+        'result': Select(attrs={'class': 'selector'})
+    }
     template_name = 'projects/builds/build_tests/build_test_form.html'
 
     def form_valid(self, form):
@@ -233,9 +295,15 @@ class BuildTestUpdate(UpdateView):
         return HttpResponseRedirect(reverse('projects:build_detail', kwargs={'pk': detail.build.id}))
 
 
-class IssueUpdate(UpdateView):
+class IssueUpdate(ModelFormWidgetMixin, UpdateView):
     model = IssueDetail
     fields = ['name', 'description', 'priority', 'severity']
+    widgets = {
+        'name': TextInput(attrs={'class': 'small-field'}),
+        'description': Textarea(attrs={'class': 'large-field'}),
+        'priority': Textarea(attrs={'class': 'selector'}),
+        'severity': Textarea(attrs={'class': 'selector'}),
+    }
     template_name = 'projects/issues/issue_form.html'
 
     def form_valid(self, form):
@@ -279,6 +347,9 @@ class BuildDelete(ArchiveView):
     success_url = 'projects:bundle_detail'
 
     def delete(self, request, *args, **kwargs):
+        for test in BuildTestDetail.objects.filter(build=self.get_object()):
+            test.status = 'ARCHIVED'
+            test.save()
         self.archive()
         return HttpResponseRedirect(reverse(self.success_url, kwargs={'pk': self.kwargs['bundle_id']}))
 

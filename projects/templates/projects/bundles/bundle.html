@@ -1,57 +1,58 @@
-{% extends "../base.html" %}
+{% extends "projects/content.html" %}
 {% load projects_extras %}
-{% block title %}TAIPAN | Bundle - {{ bd.name }}{% endblock %}
+{% block title %}TAIPAN | {{ bundle.project.name }} {{ bundle.name }}{% endblock %}
 {% block content %}
-    <h1>{{ bd.name }}</h1>
+    <h1>{{ bundle.name }}</h1>
     <div class="card">
-        {% with suite=bd|get_suite %}
-        <table class="list zebra">
-            <tr>
-                <th class="left-align">Test Suite</th>
-                <th class="left-align">Description</th>
-                <th class="right-align">Actions</th>
-            </tr>
-            <tr>
-                <td class="left-align">{{ suite.name }}</td>
-                <td class="left-align">{{ suite.description }}</td>
-                <td class="right-align">
-                    <ul>
-                        <li><a href="{% url 'projects:suite_detail' suite.id %}">View</a></li>
-                    </ul>
-                </td>
-            </tr>
-        </table>
+        {% with suite=bundle|get_suite %}
+        <div class="row">
+            <div class="col-md-8">
+                <h2>{{ suite.name }}</h2>
+            </div>
+            <div class="col-md-4 pad-24 right-align">
+                <ul class="block">
+                    <li><a href="{% url 'projects:suite_detail' suite.id %}">
+                        <span class="glyphicon glyphicon-pencil"></span> Edit
+                    </a></li>
+                    <li style="padding:16px 0 0 0;"><p class="right-align">Currently contains {{ suite|active_tests|length }} active items</p></li>
+                </ul>
+            </div>
+        </div>
     </div>
     <div class="card">
         <h2>Builds</h2>
-        {% with builds=bd|get_builds %}
+        {% with builds=bundle|get_builds %}
         {% if builds|length > 0 %}
         <table class="list zebra">
-            <tr>
-                <th></th>
-                <th class="left-align">Status</th>
-                <th class="left-align">Description</th>
-                <th class="right-align">Actions</th>
+            <tr class="row">
+                <th class="left-align col-md-1">Build ID</th>
+                <th class="center col-md-1">Status</th>
+                <th class="left-align col-md-9">Description</th>
+                <th class="right-align col-md-1">Actions</th>
             </tr>
-            {% for bid in builds %}
-            <tr>
-                <td class="left-align">{{ bid.name }}</td>
-                <td class="left-align">
-                    {% with status=bid|check_failure %}
-                    {% if status == 'FAILED' %}
-                    <p class="red bold">{{ status }}</p>
-                    {% elif status == 'PASSED' %}
-                    <p class="green bold">{{ status }}</p>
+            {% for build in builds %}
+            <tr class="row">
+                <td class="left-align col-md-1">{{ build.name }}</td>
+                <td class="center col-md-1">
+                    {% with failure_count=build|check_failures %}
+                    {% if failure_count > 0 %}
+                    <a href="#" data-toggle="tooltip" title="Build FAILED with {{ failure_count }} failed test(s)" style="cursor:help;"><span class="glyphicon glyphicon-remove-sign medium red" style="vertical-align:middle;"></span></a>
+                    {% elif failure_count == 0 %}
+                    <a href="#" data-toggle="tooltip" title="Build PASSED" style="cursor:help"><span class="glyphicon glyphicon-ok-sign medium green" style="vertical-align:middle;"></span></a>
                     {% else %}
-                    <p class="amber bold">{{ status }}</p>
+                    <a href="#" data-toggle="tooltip" title="There are tests that have not been completed" style="cursor:help;"><span class="glyphicon glyphicon-question-sign medium amber" style="vertical-align:middle;"></span></a>
                     {% endif %}
                     {% endwith %}
                 </td>
-                <td class="left-align">{{ bid.description }}</td>
-                <td class="right-align">
+                <td class="left-align multiline col-md-9">{{ build.description }}</td>
+                <td class="right-align col-md-1">
                     <ul>
-                        <li><a href="{% url 'projects:build_detail' bid.id %}">View</a></li>
-                        <li><a href="{% url 'projects:edit_build' bid.id %}">Edit</a></li>
+                        <li><a href="{% url 'projects:build_detail' build.id %}">
+                            <span class="glyphicon glyphicon-search"></span> View
+                        </a></li>
+                        <li><a href="{% url 'projects:edit_build' build.id %}">
+                            <span class="glyphicon glyphicon-pencil"></span> Edit
+                        </a></li>
                     </ul>
                 </td>
             </tr>
@@ -61,9 +62,15 @@
         <p>There are currently no builds for this project. Click the button below to add one</p>
         {% endif %}
         {% if suite|get_tests|length == 0 %}
-        <p>You must add at least one test inside the suite before a build can be added</p>
+        <div class="red bold banner">
+            <p>You must add at least one test to the suite before a build can be added</p>
+        </div>
         {% else %}
-        <a href="{% url 'projects:new_build' bd.id %}" class="right-align">+ Create Build</a>
+        <div class="right-align" style="width:100%;">
+            <a href="{% url 'projects:new_build' bundle.id %}">
+                <span class="glyphicon glyphicon-plus"></span> Create Build
+            </a>
+        </div>
         {% endif %}
         {% endwith %}
         {% endwith %}

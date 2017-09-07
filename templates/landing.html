@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+{% block style %}<link rel="stylesheet" type="text/css" href="{% static 'css/landing.css' %}">{% endblock %}
+{% block body %}
+<div id="top-bar" class="top bar">
+</div>
+<div class="main">
+    <div class="center title">TAIPAN</div>
+    <div id="links" class="center">
+        <div class="link-row">
+            <div class="col-md-4 link-tile">
+                <div class="link-card">
+                    <a href="{% url 'projects:index' %}">
+                        <p class="glyphicon glyphicon-briefcase godlike block"></p>
+                        <p class="large">Projects</p>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 link-tile">
+                <div class="link-card">
+                    <a href="{% url 'reporting:index' %}">
+                        <p class="glyphicon glyphicon-stats godlike block"></p>
+                        <p class="large">Reporting</p>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 link-tile">
+                <div class="link-card">
+                    <a>
+                        <p class="glyphicon glyphicon-calendar godlike block"></p>
+                        <p class="large">Calendar</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="link-row">
+            <div class="col-md-4 link-tile">
+                <div class="link-card">
+                    <a>
+                        <p class="glyphicon glyphicon-wrench godlike block"></p>
+                        <p class="large">Settings</p>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 link-tile">
+                <div class="link-card">
+                    <a>
+                        <p class="glyphicon glyphicon-bell godlike block"></p>
+                        <p class="large">Notifications</p>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4 link-tile">
+                <div class="link-card">
+                    <a>
+                        <p class="glyphicon glyphicon-earphone godlike block"></p>
+                        <p class="large">Contact</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="bottom-bar" class="bottom bar">
+    <ul>
+        <li class="bar-item right-align" style="width:100%;">Copyright © 2017 Fivium Limited, Australia</li>
+    </ul>
+</div>
+{% endblock %}

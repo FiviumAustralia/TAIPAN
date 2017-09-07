@@ -62,13 +62,13 @@ urlpatterns = [
     url(r'^test/view=(?P<pk>[0-9]+)/$', views.TestScenarioDetailView.as_view(), name='test_detail'),
 
     # /test/create&suite=id/
-    url(r'^issue/create&build_test=(?P<suite_id>[0-9]+)/$', views.TestScenarioCreate.as_view(), name='new_test'),
+    url(r'^test/create&build_test=(?P<suite_id>[0-9]+)/$', views.TestScenarioCreate.as_view(), name='new_test'),
 
     # /test/edit=id/
-    url(r'^issue/edit=(?P<pk>[0-9]+)/$', views.TestScenarioUpdate.as_view(), name='edit_test'),
+    url(r'^test/edit=(?P<pk>[0-9]+)/$', views.TestScenarioUpdate.as_view(), name='edit_test'),
 
     # /test/delete=id?returning=id/
-    url(r'^issue/delete=(?P<pk>[0-9]+)&returning=(?P<suite_id>[0-9]+)/$',
+    url(r'^test/delete=(?P<pk>[0-9]+)&returning=(?P<suite_id>[0-9]+)/$',
         views.TestScenarioDelete.as_view(), name='delete_test'),
 
 

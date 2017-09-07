@@ -1,4 +1,4 @@
-{% extends "../base.html" %}
+{% extends "projects/content.html" %}
 {% load projects_extras %}
 {% block title %}TAIPAN | Issue Edit{% endblock %}
 {% block content %}
@@ -11,7 +11,9 @@
     {% if form.instance.id %}
     <form action="{% url 'projects:delete_issue' form.instance.id form.instance.build_test.build.id %}" method="post">
         {% csrf_token %}
-        <button type="submit" class="danger-button right" onclick="return confirm('Are you sure you want to delete?')">Delete</button>
+        <button type="submit" class="danger-button float-right" onclick="return confirm('Are you sure you want to delete?')">
+            <span class="glyphicon glyphicon-trash"></span> Delete
+        </button>
     </form>
     {% endif %}
 {% endblock %}

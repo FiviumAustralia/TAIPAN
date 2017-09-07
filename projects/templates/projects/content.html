@@ -1,0 +1,15 @@
+{% extends "frame.html" %}
+{% load static %}
+{% block style %}<link rel="stylesheet" type="text/css" href="{% static 'projects/css/style.css' %}">{% endblock %}
+{% block main %}
+<div class="main" id="frame">
+    <div class="breadcrumbs">
+        <ul>
+            {% include "crumbs.html" %}
+        </ul>
+    </div>
+    <div id="main-content">
+        {% block content %}{% endblock %}
+    </div>
+</div>
+{% endblock %}
