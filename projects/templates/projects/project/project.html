@@ -16,14 +16,14 @@
             {% for bundle in bundles %}
             <tr class="row">
                 <td class="left-align col-md-2">{{ bundle.name }}</td>
-                <td class="left-align col-md-9">{{ bundle.description }}</td>
-                <td class="right-align col-md-1">
+                <td class="left-align col-md-8">{{ bundle.description }}</td>
+                <td class="right-align col-md-2 actions">
                     <ul>
                         <li><a href="{% url 'projects:bundle_detail' bundle.id %}">
-                            <span class="glyphicon glyphicon-search"></span> View
+                            Manage <span class="glyphicon glyphicon-book"></span>
                         </a></li>
                         <li><a href="{% url 'projects:edit_bundle' bundle.id %}">
-                            <span class="glyphicon glyphicon-pencil"></span> Edit
+                            Edit <span class="glyphicon glyphicon-pencil"></span>
                         </a></li>
                     </ul>
                 </td>

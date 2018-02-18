@@ -21,13 +21,13 @@
                     <h2>{{ project.name }}</h2>
                     <p class="left-align">{{ project.description }}</p>
                 </div>
-                <div class="col-md-2 pad-24 right-align">
+                <div class="col-md-2 pad-24 right-align actions">
                     <ul class="block">
                         <li><a href="{% url 'projects:project_detail' project.id %}">
-                            <span class="glyphicon glyphicon-search"></span> View
+                            Manage <span class="glyphicon glyphicon-book"></span>
                         </a></li>
                         <li><a href="{% url 'projects:edit_project' project.id %}">
-                            <span class="glyphicon glyphicon-pencil"></span> Edit
+                            Edit <span class="glyphicon glyphicon-pencil"></span>
                         </a></li>
                     </ul>
                 </div>

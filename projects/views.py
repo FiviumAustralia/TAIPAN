@@ -1,10 +1,24 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import *
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from datetime import datetime
 from django.forms import TextInput, Textarea, Select, CheckboxInput
 from .forms import ModelFormWidgetMixin, BuildForm
+from .templatetags import projects_extras
 import reversion
+import csv
+
+
+# Generate CSV
+
+def export_csv(request, pk):
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="' + datetime.now().strftime("%Y%m%d-%H.%M.%S") + '_test_export.csv"'
+    writer = csv.writer(response)
+    queryset = projects_extras.get_tests(SuiteDetail.objects.get(pk=pk))
+    for record in queryset:
+        writer.writerow([record.reference_number, record.overview, record.steps, record.expected, record.requisite])
+    return response
 
 
 # Create your views here.

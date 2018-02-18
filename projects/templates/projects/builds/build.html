@@ -22,7 +22,7 @@
                 <td class="left-align multiline col-md-3">{{ build_test.description }}</td>
                 <td class="left-align col-md-3">{{ build_test.expected }}</td>
                 <td class="left-align col-md-3">{{ build_test.actual }}</td>
-                <td class="center col-md-1">
+                <td class="center col-md-1 actions">
                     {% if build_test.result == 'FAILED' %}
                     <p class="red bold">{{ build_test.result }}</p>
                     {% elif build_test.result == 'PASSED' %}
@@ -34,7 +34,7 @@
                 <td class="right-align col-md-1">
                     <ul>
                         <li><a href="{% url 'projects:edit_build_test' build_test.id %}">
-                            <span class="glyphicon glyphicon-pencil"></span> Edit
+                            Edit <span class="glyphicon glyphicon-pencil"></span>
                         </a></li>
                     </ul>
                 </td>

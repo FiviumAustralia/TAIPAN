@@ -4,9 +4,6 @@
 body
   background-color: $shade-0!important
 
-#links
-  margin: 0 calc(#{$sidebar-width} + 4px)
-
 .main
   margin: $top-margin $sidebar-width 0 $sidebar-width
   padding: 12px
@@ -42,6 +39,7 @@ table.list td, table.list th
   padding: 8px
   word-wrap: break-word
   overflow-wrap: break-word
+  white-space: pre-line
 
 table.list td.multiline
   white-space: pre-line
@@ -53,17 +51,6 @@ table.list td.multiline
 table.zebra tr
   &:nth-child(even)
     background-color: $shade-1
-
-div.card
-  box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.3)
-  border: 1px solid $shade-1
-  padding: 16px
-  margin: 8px 0
-  &.over
-    border: 2px dotted $color-secondary-0
-
-#main-content:last-child
-  margin-bottom: 64px !important
 
 tr.strike td.strikeable
   color: $shade-3

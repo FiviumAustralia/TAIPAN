@@ -3,8 +3,8 @@ from django.urls import reverse
 from django.core.validators import RegexValidator
 from datetime import datetime
 
-alphanumeric_period = RegexValidator(r'^[0-9a-zA-Z\.]*$', 'Only alphanumeric and the period characters are allowed.')
-numeric_period_dash = RegexValidator(r'^[0-9_.-]+$', 'Only numeric, dashes and the period characters are allowed.')
+alphanumeric_plus = RegexValidator(r'^[0-9a-zA-Z\_\.\-\s]*$', 'Only alphanumeric, spaces, dashes and the period characters are allowed.')
+numeric_plus = RegexValidator(r'^[0-9\_\.\-\s]+$', 'Only numeric, spaces, dashes and the period characters are allowed.')
 
 
 # Create your models here.
@@ -52,7 +52,7 @@ class RequirementDetail(NamedDetail):
 
 
 class BuildDetail(Detail):
-    name = models.CharField(max_length=50, validators=[numeric_period_dash])
+    name = models.CharField(max_length=50, validators=[numeric_plus])
     description = models.CharField(max_length=4000)
     bundle = models.ForeignKey(BundleDetail, on_delete=models.CASCADE)
     cascade_tests = models.BooleanField(default=False)
@@ -71,7 +71,7 @@ class SuiteDetail(NamedDetail):
 class TestScenarioDetail(Detail):
     suite = models.ForeignKey(SuiteDetail, on_delete=models.CASCADE)
     # requirement = models.ForeignKey(RequirementDetail, on_delete=models.SET_NULL, null=True, blank=True)
-    reference_number = models.CharField(max_length=16, blank=True, null=True, validators=[alphanumeric_period])
+    reference_number = models.CharField(max_length=25, blank=True, null=True, validators=[alphanumeric_plus])
     overview = models.CharField(max_length=200)
     steps = models.CharField(max_length=4000)
 

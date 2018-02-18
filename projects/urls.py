@@ -56,6 +56,8 @@ urlpatterns = [
     # /suite/view=id/
     url(r'^suite/view=(?P<pk>[0-9]+)/$', views.SuiteDetailView.as_view(), name='suite_detail'),
 
+    url(r'^suite/csv=(?P<pk>[0-9]+)/$', views.export_csv, name='csv'),
+
 
     # TESTS
     # /test/id

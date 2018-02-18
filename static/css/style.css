@@ -151,6 +151,9 @@ h3 {
 .pad-32 {
   padding: 32px 0; }
 
+.no-pad {
+  padding: 0 !important; }
+
 .mar-8 {
   margin: 8px 0; }
 
@@ -162,6 +165,9 @@ h3 {
 
 .mar-32 {
   margin: 32px 0; }
+
+.no-margin {
+  margin: 0 !important; }
 
 .top {
   top: 0; }
@@ -264,6 +270,18 @@ h3 {
 .crumb {
   display: inline; }
 
+.card {
+  box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.3);
+  background-color: white;
+  border: 1px solid #EAEAEA;
+  padding: 16px;
+  margin: 8px 0; }
+  .card.over {
+    border: 2px dotted #3C7C97; }
+
+#main-content:last-child {
+  margin-bottom: 64px !important; }
+
 .btn, .button {
   border: none;
   display: inline-block;
@@ -349,5 +367,9 @@ button.danger-button {
     background: -ms-linear-gradient(top, #C4483D 5%, #DC6D63 100%);
     background: linear-gradient(to bottom, #C4483D 5%, #DC6D63 100%);
     background-color: #C4483D; }
+
+.actions ul li {
+  padding: 16px 0;
+  white-space: nowrap; }
 
 /*# sourceMappingURL=style.css.map */

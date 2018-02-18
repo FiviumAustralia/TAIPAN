@@ -44,9 +44,6 @@ table {
 body {
   background-color: white !important; }
 
-#links {
-  margin: 0 calc(12.5% + 4px); }
-
 .main {
   margin: 128px 12.5% 0 12.5%;
   padding: 12px;
@@ -81,7 +78,8 @@ table.list {
 table.list td, table.list th {
   padding: 8px;
   word-wrap: break-word;
-  overflow-wrap: break-word; }
+  overflow-wrap: break-word;
+  white-space: pre-line; }
 
 table.list td.multiline {
   white-space: pre-line; }
@@ -92,17 +90,6 @@ table.list td.multiline {
 
 table.zebra tr:nth-child(even) {
   background-color: #EAEAEA; }
-
-div.card {
-  box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.3);
-  border: 1px solid #EAEAEA;
-  padding: 16px;
-  margin: 8px 0; }
-  div.card.over {
-    border: 2px dotted #3C7C97; }
-
-#main-content:last-child {
-  margin-bottom: 64px !important; }
 
 tr.strike td.strikeable {
   color: #727272;

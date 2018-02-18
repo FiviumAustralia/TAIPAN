@@ -111,6 +111,9 @@ h3
 .pad-32
   padding: 32px 0
 
+.no-pad
+  padding: 0!important
+
 .mar-8
   margin: 8px 0
 
@@ -122,6 +125,9 @@ h3
 
 .mar-32
   margin: 32px 0
+
+.no-margin
+  margin: 0!important
 
 .top
   top: 0
@@ -227,6 +233,18 @@ h3
 .crumb
   display: inline
 
+.card
+  box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.3)
+  background-color: $shade-0
+  border: 1px solid $shade-1
+  padding: 16px
+  margin: 8px 0
+  &.over
+    border: 2px dotted $color-secondary-0
+
+#main-content:last-child
+  margin-bottom: 64px !important
+
 .btn, .button
   border: none
   display: inline-block
@@ -312,3 +330,7 @@ button.danger-button
     background: -ms-linear-gradient(top, $btn-2-to 5%, $btn-2-from 100%)
     background: linear-gradient(to bottom, $btn-2-to 5%, $btn-2-from 100%)
     background-color: $btn-2-to
+
+.actions ul li
+  padding: 16px 0
+  white-space: nowrap

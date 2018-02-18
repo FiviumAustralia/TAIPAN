@@ -12,8 +12,9 @@
     <link href="https://fonts.googleapis.com/css?family=Sedgwick+Ave" rel="stylesheet">
     <link rel="shortcut icon" href="{% static 'img/snake.ico' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="{% static 'projects/javascript/manage.js' %}"></script>
+    <script src="{% static 'projects/javascript/manage.js' %}"></script><!-- TODO move this out!!! -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    {% block scripts %}{% endblock %}
 </head>
 <body>
 {% block body %}{% endblock %}

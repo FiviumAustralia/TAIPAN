@@ -27,10 +27,10 @@
                 <td class="left-align strikeable col-md-3">{{ test.steps }}</td>
                 <td class="left-align strikeable col-md-3">{{ test.expected }}</td>
                 <td class="justify col-md-1">{{ test.requisite }}</td>
-                <td class="right-align col-md-1">
+                <td class="right-align col-md-1 actions">
                     <ul>
                         <li><a href="{% url 'projects:edit_test' test.id %}" data-toggle="tooltip">
-                            <span class="glyphicon glyphicon-pencil"></span> Edit
+                            Edit <span class="glyphicon glyphicon-pencil"></span>
                         </a></li>
                     </ul>
                 </td>
@@ -43,6 +43,11 @@
         <div class="right-align" style="width:100%;">
             <a href="{% url 'projects:new_test' suite.id %}">
                 <span class="glyphicon glyphicon-plus"></span> Create Test Scenario
+            </a>
+        </div>
+        <div class="right-align" style="width:100%;">
+            <a target="_blank" href="{% url 'projects:csv' suite.id %}">
+                <span class="glyphicon glyphicon-download-alt"></span> Download CSV
             </a>
         </div>
         {% endwith %}
