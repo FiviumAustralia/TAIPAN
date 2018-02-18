@@ -1,0 +1,47 @@
+{% extends "projects/content.html" %}
+{% load projects_extras %}
+{% block title %}TAIPAN | {{ build.bundle.name }} build {{ build.name }}{% endblock %}
+{% block content %}
+    <h1>Build {{ build.name }}</h1>
+    <div class="card">
+        <h2>Tests</h2>
+        {% with tests=build|get_build_tests %}
+        {% if tests|length > 0 %}
+        <table class="list zebra">
+            <tr class="row">
+                <th class="laft-align col-md-1">Test ID</th>
+                <th class="left-align col-md-3">Description</th>
+                <th class="left-align col-md-3">Expected</th>
+                <th class="left-align col-md-3">Actual</th>
+                <th class="center col-md-1">Result</th>
+                <th class="right-align col-md-1">Actions</th>
+            </tr>
+            {% for build_test in tests %}
+            <tr class="row">
+                <td class="left-align col-md-1" style="white-space:pre-wrap;">{{ build_test.name }}</td>
+                <td class="left-align multiline col-md-3">{{ build_test.description }}</td>
+                <td class="left-align col-md-3">{{ build_test.expected }}</td>
+                <td class="left-align col-md-3">{{ build_test.actual }}</td>
+                <td class="center col-md-1 actions">
+                    {% if build_test.result == 'FAILED' %}
+                    <p class="red bold">{{ build_test.result }}</p>
+                    {% elif build_test.result == 'PASSED' %}
+                    <p class="green bold">{{ build_test.result }}</p>
+                    {% else %}
+                    <p class="amber bold">AWAITING RESULT</p>
+                    {% endif %}
+                </td>
+                <td class="right-align col-md-1">
+                    <ul>
+                        <li><a href="{% url 'projects:edit_build_test' build_test.id %}">
+                            Edit <span class="glyphicon glyphicon-pencil"></span>
+                        </a></li>
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        {% endwith %}
+    </div>
+{% endblock %}

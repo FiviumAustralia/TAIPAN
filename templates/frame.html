@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block body %}
+<nav id="sidebar-left" class="sidebar top bar-block animate-left" style="display:none;">
+    <a href="javascript:void(0)" onclick="close_sidebar()" class="bar-item button float-left">
+        <span class="glyphicon glyphicon-menu-hamburger"></span>
+    </a>
+</nav>
+<div id="top-bar" class="top">
+    <div class="button float-left" onclick="open_sidebar()" style="position:fixed!important;z-index:2;color:white;">
+        <span class="glyphicon glyphicon-menu-hamburger"></span>
+    </div>
+    <div class="float-right"><img src="{% static 'img/snake.ico' %}" class="logo"/></div>
+    <div class="app-title">
+        <div class="home">
+            <a href="{% url 'index' %}" style="text-decoration: none;">
+                <div class="center inner top title">TAIPAN</div>
+                <div class="center inner subtitle">Testing Analysis Integration Panacea</div>
+            </a>
+        </div>
+    </div>
+    <div id="top-divider" class="bar bottom inner">
+    </div>
+</div>
+{% block main %}{% endblock %}
+<div id="bottom-bar" class="bottom bar">
+    <ul>
+        <li class="bar-item right-align" style="width:100%;">Copyright © 2017 Fivium Limited, Australia</li>
+    </ul>
+</div>
+{% endblock %}

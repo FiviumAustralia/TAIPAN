@@ -1,0 +1,43 @@
+{% extends "projects/content.html" %}
+{% load projects_extras %}
+{% block title %}TAIPAN | Project {{ project.name }}{% endblock %}
+{% block content %}
+    <h1>Details for Project {{ project.name }}</h1>
+    <div class="card">
+        <h2>Bundles</h2>
+        {% with bundles=project|get_bundles %}
+        {% if bundles|length > 0 %}
+        <table class="list zebra">
+            <tr class="row">
+                <th class="col-md-2"></th>
+                <th class="left-align col-md-9">Description</th>
+                <th class="right-align col-md-1">Actions</th>
+            </tr>
+            {% for bundle in bundles %}
+            <tr class="row">
+                <td class="left-align col-md-2">{{ bundle.name }}</td>
+                <td class="left-align col-md-8">{{ bundle.description }}</td>
+                <td class="right-align col-md-2 actions">
+                    <ul>
+                        <li><a href="{% url 'projects:bundle_detail' bundle.id %}">
+                            Manage <span class="glyphicon glyphicon-book"></span>
+                        </a></li>
+                        <li><a href="{% url 'projects:edit_bundle' bundle.id %}">
+                            Edit <span class="glyphicon glyphicon-pencil"></span>
+                        </a></li>
+                    </ul>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% else %}
+        <p>There are currently no bundles for this project. Click the button below to add one</p>
+        {% endif %}
+        {% endwith %}
+        <div class="right-align" style="width:100%;">
+            <a href="{% url 'projects:new_bundle' project.id %}">
+                <span class="glyphicon glyphicon-plus"></span> Create Bundle
+            </a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,34 @@
+@import ../../../../static/sass/reset
+@import ../../../../static/sass/global
+
+.main
+  margin: $top-margin $sidebar-width 0 $sidebar-width
+  padding: 12px
+  min-height: $main-height!important
+  background-color: $shade-0
+
+.square
+  margin: 0
+  &:after
+    content: ""
+    display: block
+    padding-bottom: 100%
+
+.blue-card
+  background-color: $color-secondary-2
+  border: 0px
+
+.card-chart
+  position: absolute
+  margin: 0
+  width: calc(100% - 64px)
+  height: calc(100% - 64px)
+
+.chart-inner
+  width: 100%
+  height: 100%
+  padding: 0 8px 16px 8px
+
+.chart-inner canvas
+  padding: 16px
+  display: block

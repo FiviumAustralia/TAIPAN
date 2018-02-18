@@ -1,0 +1,82 @@
+{% extends "reporting/content.html" %}
+{% load staticfiles %}
+{% block style %}<link rel="stylesheet" type="text/css" href="{% static 'reporting/css/style.css' %}">{% endblock %}
+{% block scripts %}<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>{% endblock %}
+{% block title %}TAIPAN | Reporting{% endblock %}
+{% block content %}
+<div>
+    <div class="row">
+        <div class="col-md-3 pad-16">
+            <div class="square card blue-card">
+                <a href="#">
+                    <div class="card card-chart">
+                        <p class="center medium no-margin">Test Results Overview</p>
+                        <div class="chart-inner">
+                            <canvas id="pie-chart"></canvas>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3 pad-16">
+            <div class="square card blue-card">
+                <a href="#">
+                    <div class="card card-chart">
+                        <p class="center medium no-margin">Result Frequency</p>
+                        <div class="chart-inner">
+                            <canvas id="bar-chart"></canvas>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3 pad-16">
+            <div class="square card blue-card">
+                <a href="#">
+                    <div class="card card-chart">
+                        <p class="center medium no-margin">Test Lifespan</p>
+                        <div class="chart-inner">
+                            <canvas id="scatter-chart"></canvas>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3 pad-16">
+            <div class="square card blue-card">
+                <a href="#">
+                    <div class="card card-chart">
+                        <p class="center medium no-margin">Burndown</p>
+                        <div class="chart-inner">
+                            <canvas id="burndown-chart"></canvas>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 pad-16">
+            <div class="square card blue-card">
+                <div class="card card-chart"></div>
+            </div>
+        </div>
+        <div class="col-md-3 pad-16">
+            <div class="square card blue-card">
+                <div class="card card-chart"></div>
+            </div>
+        </div>
+        <div class="col-md-3 pad-16">
+            <div class="square card blue-card">
+                <div class="card card-chart"></div>
+            </div>
+        </div>
+        <div class="col-md-3 pad-16">
+            <div class="square card blue-card">
+                <div class="card card-chart"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'reporting/javascript/chart_examples.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "projects/content.html" %}
+{% load staticfiles %}
+{% block title %}TAIPAN | Projects{% endblock %}
+{% block content %}
+    <h1>Projects</h1>
+    {% if projects|length > 0 %}
+    <div id="project-cards" draggable="false">
+        {% for project in projects %}
+        <div class="card" draggable="true" id="card{{ project.id }}">
+            <div class="row">
+                <div class="col-md-2" style="display:inline-block!important;">
+                    <div class="project-logo-main">
+                    {% if project.project_logo %}
+                        <img src="{{ project.project_logo.url }}"/>
+                    {% else %}
+                        <img src="{% static 'projects/img/placeholder.png' %}"/>
+                    {% endif %}
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <h2>{{ project.name }}</h2>
+                    <p class="left-align">{{ project.description }}</p>
+                </div>
+                <div class="col-md-2 pad-24 right-align actions">
+                    <ul class="block">
+                        <li><a href="{% url 'projects:project_detail' project.id %}">
+                            Manage <span class="glyphicon glyphicon-book"></span>
+                        </a></li>
+                        <li><a href="{% url 'projects:edit_project' project.id %}">
+                            Edit <span class="glyphicon glyphicon-pencil"></span>
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        <script src="{% static 'projects/javascript/dragdrop.js' %}"></script>
+    </div>
+    {% else %}
+        <p>There are currently no projects. Click the button below to add one</p>
+    {% endif %}
+    <div class="right-align" style="width:100%;">
+        <a href="{% url 'projects:new_project' %}">
+            <span class="glyphicon glyphicon-plus"></span> Create Project
+        </a>
+    </div>
+{% endblock %}

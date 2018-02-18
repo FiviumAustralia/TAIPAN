@@ -1,0 +1,16 @@
+<form action="" method="post" class="main-form" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% for field in form %}
+    <div class="form-content">
+        <div>
+            <span>{{ field.errors }}</span>
+        </div>
+        <label>{{ field.label_tag }}</label>
+        <div>{{ field }}</div>
+    </div>
+    {% endfor %}
+    <div class="mar-32">
+        <button type="submit" class="primary-button"><span class="glyphicon glyphicon-save"></span> Submit</button>
+        <button type="button" class="secondary-button" onclick="confirm_cancellation()">Cancel</button>
+    </div>
+</form>

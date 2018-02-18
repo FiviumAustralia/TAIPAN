@@ -1,0 +1,128 @@
+@import ../../../../static/sass/reset
+@import ../../../../static/sass/global
+
+body
+  background-color: $shade-0!important
+
+.main
+  margin: $top-margin $sidebar-width 0 $sidebar-width
+  padding: 12px
+  min-height: $main-height!important
+  background-color: $shade-0
+
+.main-form div
+  width: 100%
+
+.main-form input[type="text"], textarea
+  width: 50%
+
+.main-form label
+    font-size: $font-small
+    margin-bottom: 0
+    margin-top: 4px
+
+.light
+  border: 0
+  border-top: 1px solid $shade-4
+  background-color: $shade-4
+
+table.list
+  display: table
+  width: 100%
+  margin: 8px 0
+  & th
+    font-weight: bold
+    background-color: $color-secondary-1
+    padding: 2px
+
+table.list td, table.list th
+  padding: 8px
+  word-wrap: break-word
+  overflow-wrap: break-word
+  white-space: pre-line
+
+table.list td.multiline
+  white-space: pre-line
+
+.full
+  width: 100%
+  margin: 0
+
+table.zebra tr
+  &:nth-child(even)
+    background-color: $shade-1
+
+tr.strike td.strikeable
+  color: $shade-3
+  text-decoration: line-through
+
+div.banner
+  width: 100%
+  padding: 8px
+  border-width: 3px
+  border-radius: 16px
+  border-style: solid
+
+div.danger
+  border-color: $red
+
+div.warning
+  border-color: $amber
+
+div.info
+  border-color: $color-secondary-1
+
+.large-field
+  height: 100px
+  font-size: $font-small
+  overflow-x: hidden
+  overflow-y: scroll
+  overflow-wrap: break-word
+  resize: vertical
+
+.small-field
+  height: $font-small + 8px
+  font-size: $font-small
+  overflow-wrap: normal
+
+.tiny-field
+  height: $font-small + 8px
+  width: 25%!important
+  font-size: $font-small
+  overflow-wrap: normal
+
+.selector
+  min-width: 100px
+  min-height: 30px
+
+.project-logo-main
+  position: relative
+  overflow: hidden
+  width: 100%
+  max-width: 200px
+  background-color: $shade-0
+  box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.3)
+  border: 1px solid $shade-1
+  &:before
+    content: ""
+    display: block
+    padding-top: 100%
+
+.project-logo-main img
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  padding: 10px
+  max-width: 100%
+  max-height: 100%
+  overflow: hidden
+
+[draggable]
+  -moz-user-select: none
+  -khtml-user-select: none
+  -webkit-user-select: none
+  user-select: none
+  -khtml-user-drag: element
+  -webkit-user-drag: element

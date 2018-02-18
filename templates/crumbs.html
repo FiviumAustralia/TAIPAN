@@ -1,0 +1,28 @@
+{% load projects_extras %}
+<li class="crumb">> <a href="{% url 'projects:index' %}">Projects</a></li>
+<!-- Check for the existing model -->
+{% if view.object %}
+{% with crumbs=view.object|generate_breadcrumbs %}
+{% for crumb in crumbs %}
+<li class="crumb">>
+    {% if crumb.2 != True %}
+    <a href="{{ crumb.1 }}">{{ crumb.0.name }}{{ crumb.0.overview }}</a>
+    {% else %}
+    {{ crumb.0.name }}{{ crumb.0.overview }}
+    {% endif %}
+</li>
+{% endfor %}
+{% endwith %}
+{% else %}
+{% with crumbs=parent|generate_breadcrumbs:False %}
+{% for crumb in crumbs %}
+<li class="crumb">>
+    {% if crumb.2 != True %}
+    <a href="{{ crumb.1 }}">{{ crumb.0.name }}{{ crumb.0.overview }}</a>
+    {% else %}
+    {{ crumb.0.name }}{{ crumb.0.overview }}
+    {% endif %}
+</li>
+{% endfor %}
+{% endwith %}
+{% endif %}

@@ -1,0 +1,336 @@
+@import reset
+@import global
+
+html
+  height: 100%
+  font-family: $body-font
+
+#top-bar
+  background-color: $shade-4
+  height: $top-margin
+
+#top-divider
+  height: 36px
+  background-color: $color-secondary-0
+  position: absolute
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.5)
+
+#bottom-bar
+  color: $shade-0
+  background-color: $shade-4
+  height: $bottom-margin
+
+.title
+  color: $shade-0
+  padding: 16px 0 0 0
+  font-size: $font-medium
+  font-family: $title-font
+
+.subtitle
+  color: $shade-1
+  font-size: $font-tiny
+
+.app-title
+  height: 100%
+
+.home
+  height: calc(100% - 36px)
+  max-width: 15%
+  margin: 0 auto
+  text-align: center
+
+.bold
+  font-weight: bold
+
+.left-align
+  text-align: left!important
+
+.right-align
+  text-align: right!important
+
+.justify
+  text-align: justify!important
+
+.center
+  text-align: center!important
+
+h1
+  font-size: $font-huge
+
+h2
+  font-size: $font-large
+
+h3
+  font-size: $font-medium
+
+.godlike
+  font-size: $font-godlike
+
+.gigantic
+  font-size: $font-gigantic
+
+.huge
+  font-size: $font-huge
+
+.large
+  font-size: $font-large
+
+.medium
+  font-size: $font-medium
+
+.small
+  font-size: $font-small
+
+.tiny
+  font-size: $font-tiny
+
+.float-left
+  float: left!important
+
+.float-right
+  float: right!important
+
+.amber
+  color: $amber
+
+.green
+  color: $green
+
+.red
+  color: $red
+
+.pad-8
+  padding: 8px 0
+
+.pad-16
+  padding: 16px 0
+
+.pad-24
+  padding: 24px 0
+
+.pad-32
+  padding: 32px 0
+
+.no-pad
+  padding: 0!important
+
+.mar-8
+  margin: 8px 0
+
+.mar-16
+  margin: 16px 0
+
+.mar-24
+  margin: 24px 0
+
+.mar-32
+  margin: 32px 0
+
+.no-margin
+  margin: 0!important
+
+.top
+  top: 0
+
+.bottom
+  bottom: 0
+
+.top, .bottom
+  position: fixed
+  width: 100%
+  z-index: 1
+
+.block
+  display: block
+  width: 100%
+
+.inner
+  position: relative
+
+.bar
+  width: 100%
+  overflow: hidden
+
+.center .bar
+  display: inline-block
+  width: auto
+
+.bar .bar-item
+  padding: 8px 16px
+  height: 100%
+  float: left
+  width: auto
+  border: none
+  outline: none
+  vertical-align: middle
+
+.bar-block .bar-item
+  width: 100%
+  display: block
+  padding: 8px 16px
+  box-sizing: border-box
+  text-align: left
+  border: none
+  outline: none
+  white-space: normal
+  float: none
+
+.bar-block.center .bar-item
+  text-align: center
+
+.logo
+  height: 112px
+  width: 112px
+  margin: -20px -10px 0 0
+  right: 0
+  top: 0
+  position: fixed!important
+  z-index: 1
+
+.sidebar
+  height: 100%
+  width: $sidebar-width
+  background-color: $color-primary-0
+  position: fixed!important
+  z-index: 2
+  overflow: auto
+
+.sidebar .button
+  &:hover
+    color: $shade-4!important
+    background-color: $color-primary-2!important
+
+.animate-left
+  position: relative
+  animation: animateleft 0.2s
+  @keyframes animateleft
+    from
+      left: -300px
+      opacity: 0.5
+    to
+      left: 0
+      opacity: 1
+
+.animate-right
+  position: relative
+  animation: animateright 0.2s
+  @keyframes animateright
+    from
+      right: -300px
+      opacity: 0.5
+    to
+      right: 0
+      opacity: 1
+
+.breadcrumbs
+  font-size: $font-small
+  color: $shade-4
+  a
+    color: $shade-3
+    &:hover
+      color: $shade-2
+
+.crumb
+  display: inline
+
+.card
+  box-shadow: 2px 4px 4px 0px rgba(0, 0, 0, 0.3)
+  background-color: $shade-0
+  border: 1px solid $shade-1
+  padding: 16px
+  margin: 8px 0
+  &.over
+    border: 2px dotted $color-secondary-0
+
+#main-content:last-child
+  margin-bottom: 64px !important
+
+.btn, .button
+  border: none
+  display: inline-block
+  outline: 0
+  padding: 8px 16px
+  vertical-align: middle
+  overflow: hidden
+  text-decoration: none
+  color: inherit
+  background-color: inherit
+  text-align: center
+  cursor: pointer
+  white-space: nowrap
+
+button
+  display: inline-block
+  font-size: $font-small
+  padding: 4px 12px
+  text-decoration: none
+
+button.primary-button
+  -moz-box-shadow: inset 0px 1px 0px 0px $btn-0-shadow
+  -webkit-box-shadow: inset 0px 1px 0px 0px $btn-0-shadow
+  box-shadow: inset 0px 1px 0px 0px $btn-0-shadow
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, $btn-0-from), color-stop(1, $btn-0-to))
+  background: -moz-linear-gradient(top, $btn-0-from 5%, $btn-0-to 100%)
+  background: -webkit-linear-gradient(top, $btn-0-from 5%, $btn-0-to 100%)
+  background: -o-linear-gradient(top, $btn-0-from 5%, $btn-0-to 100%)
+  background: -ms-linear-gradient(top, $btn-0-from 5%, $btn-0-to 100%)
+  background: linear-gradient(to bottom, $btn-0-from 5%, $btn-0-to 100%)
+  background-color: $btn-0-from
+  border: 1px solid $btn-0-border
+  color: $btn-0-font-color
+  &:hover
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, $btn-0-to), color-stop(1, $btn-0-from))
+    background: -moz-linear-gradient(top, $btn-0-to 5%, $btn-0-from 100%)
+    background: -webkit-linear-gradient(top, $btn-0-to 5%, $btn-0-from 100%)
+    background: -o-linear-gradient(top, $btn-0-to 5%, $btn-0-from 100%)
+    background: -ms-linear-gradient(top, $btn-0-to 5%, $btn-0-from 100%)
+    background: linear-gradient(to bottom, $btn-0-to 5%, $btn-0-from 100%)
+    background-color: $btn-0-to
+
+button.secondary-button
+  -moz-box-shadow: inset 0px 1px 0px 0px $btn-1-shadow
+  -webkit-box-shadow: inset 0px 1px 0px 0px $btn-1-shadow
+  box-shadow: inset 0px 1px 0px 0px $btn-1-shadow
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, $btn-1-from), color-stop(1, $btn-1-to))
+  background: -moz-linear-gradient(top, $btn-1-from 5%, $btn-1-to 100%)
+  background: -webkit-linear-gradient(top, $btn-1-from 5%, $btn-1-to 100%)
+  background: -o-linear-gradient(top, $btn-1-from 5%, $btn-1-to 100%)
+  background: -ms-linear-gradient(top, $btn-1-from 5%, $btn-1-to 100%)
+  background: linear-gradient(to bottom, $btn-1-from 5%, $btn-1-to 100%)
+  background-color: $btn-1-from
+  border: 1px solid $btn-1-border
+  color: $btn-1-font-color
+  &:hover
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, $btn-1-to), color-stop(1, $btn-1-from))
+    background: -moz-linear-gradient(top, $btn-1-to 5%, $btn-1-from 100%)
+    background: -webkit-linear-gradient(top, $btn-1-to 5%, $btn-1-from 100%)
+    background: -o-linear-gradient(top, $btn-1-to 5%, $btn-1-from 100%)
+    background: -ms-linear-gradient(top, $btn-1-to 5%, $btn-1-from 100%)
+    background: linear-gradient(to bottom, $btn-1-to 5%, $btn-1-from 100%)
+    background-color: $btn-1-to
+
+button.danger-button
+  -moz-box-shadow: inset 0px 1px 0px 0px $btn-2-shadow
+  -webkit-box-shadow: inset 0px 1px 0px 0px $btn-2-shadow
+  box-shadow: inset 0px 1px 0px 0px $btn-2-shadow
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, $btn-2-from), color-stop(1, $btn-2-to))
+  background: -moz-linear-gradient(top, $btn-2-from 5%, $btn-2-to 100%)
+  background: -webkit-linear-gradient(top, $btn-2-from 5%, $btn-2-to 100%)
+  background: -o-linear-gradient(top, $btn-2-from 5%, $btn-2-to 100%)
+  background: -ms-linear-gradient(top, $btn-2-from 5%, $btn-2-to 100%)
+  background: linear-gradient(to bottom, $btn-2-from 5%, $btn-2-to 100%)
+  background-color: $btn-2-from
+  border: 1px solid $btn-2-border
+  color: $btn-2-font-color
+  &:hover
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, $btn-2-to), color-stop(1, $btn-2-from))
+    background: -moz-linear-gradient(top, $btn-2-to 5%, $btn-2-from 100%)
+    background: -webkit-linear-gradient(top, $btn-2-to 5%, $btn-2-from 100%)
+    background: -o-linear-gradient(top, $btn-2-to 5%, $btn-2-from 100%)
+    background: -ms-linear-gradient(top, $btn-2-to 5%, $btn-2-from 100%)
+    background: linear-gradient(to bottom, $btn-2-to 5%, $btn-2-from 100%)
+    background-color: $btn-2-to
+
+.actions ul li
+  padding: 16px 0
+  white-space: nowrap

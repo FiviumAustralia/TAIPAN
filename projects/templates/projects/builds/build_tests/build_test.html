@@ -1,0 +1,28 @@
+{% extends "projects/content.html" %}
+{% load projects_extras %}
+{% block title %}TAIPAN | {{ build_test.name }}{% endblock %}
+{% block content %}
+    <h1>{{ build_test.name }}</h1>
+    <div class="row">
+        <div class="col-md-5">
+            <p class="left-align">Expected</p>
+        </div>
+        <div class="col-md-5">
+            <p class="left-align">Actual</p>
+        </div>
+        <div class="col-md-2">
+            <p class="right-align">Result</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <p class="left-align">{{ build_test.expected }}</p>
+        </div>
+        <div class="col-md-5">
+            <p class="left-align">{{ build_test.actual }}</p>
+        </div>
+        <div class="col-md-2">
+            <p class="right-align">{{ build_test.result }}</p>
+        </div>
+    </div>
+{% endblock %}
